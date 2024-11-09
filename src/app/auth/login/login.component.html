@@ -1,0 +1,22 @@
+<form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+  <mat-form-field>
+    <input matInput placeholder="Email" formControlName="email" />
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="Password"
+      type="password"
+      formControlName="password"
+    />
+  </mat-form-field>
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="loginForm.invalid"
+  >
+    Login
+  </button>
+  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+</form>

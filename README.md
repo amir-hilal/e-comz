@@ -1,6 +1,15 @@
 # EComz
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.11.
+EComz is an e-commerce platform built as part of an assessment project with the company ITXI. The purpose of this project is to demonstrate skills in Angular development, creating a functional, responsive, and user-friendly online store. The project includes core e-commerce functionalities such as product listings, detailed product views, and user authentication, integrating with the FakeStore API for product data.
+
+## Project Overview
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.11. EComz utilizes the latest Angular practices, aiming to provide a seamless shopping experience for users.
+
+### Project Guide
+
+The project is guided by **ITXI** with mentorship and oversight from **Hussein Ghandour** (h.ghandour@itxi.net).
+
 
 ## Development server
 
