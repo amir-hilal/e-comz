@@ -84,7 +84,9 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              }
+              },
+              "src/assets/icons",
+              "src/assets"
             ],
             "styles": ["src/styles.scss"],
             "scripts": []
