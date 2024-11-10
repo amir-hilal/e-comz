@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
-import { BehaviorSubject, from } from 'rxjs';
+import { BehaviorSubject, from, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 @Injectable({
@@ -17,10 +17,20 @@ export class AuthService {
     });
   }
 
-  register(email: string, password: string) {
+  register(
+    email: string,
+    password: string
+  ): Observable<firebase.auth.UserCredential> {
     return from(
       this.afAuth.createUserWithEmailAndPassword(email, password)
-    ).pipe(tap((userCredential) => this.authState.next(userCredential.user)));
+    ).pipe(
+      tap((userCredential) => {
+        if (userCredential) {
+          console.log('Registration successful:', userCredential); 
+          this.authState.next(userCredential.user);
+        }
+      })
+    );
   }
 
   login(email: string, password: string) {

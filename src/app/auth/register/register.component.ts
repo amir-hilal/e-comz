@@ -12,7 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -57,7 +57,10 @@ export class RegisterComponent {
   onRegister() {
     const { email, password } = this.registerForm.value;
     this.authService.register(email, password).subscribe({
-      next: () => {},
+      next: (response) => {
+        console.log('Registration response:', response);
+        this.router.navigate(['/auth/login']);
+      },
       error: (error: any) => {
         this.errorMessage = 'Registration failed. Please try again.';
         console.error('Registration error:', error);
