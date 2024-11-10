@@ -1,3 +1,4 @@
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import {
@@ -30,17 +31,27 @@ import { AuthService } from '../../services/auth.service';
 export class RegisterComponent {
   registerForm: FormGroup;
   errorMessage: string = '';
+  isSmallScreen: boolean = false;
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private breakpointObserver: BreakpointObserver
   ) {
     this.registerForm = this.fb.group({
       username: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
+  }
+
+  ngOnInit() {
+    this.breakpointObserver
+      .observe(['(max-width: 768px)'])
+      .subscribe((state: BreakpointState) => {
+        this.isSmallScreen = state.matches;
+      });
   }
 
   onRegister() {

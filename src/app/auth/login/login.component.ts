@@ -1,3 +1,4 @@
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import {
@@ -29,16 +30,26 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent {
   loginForm: FormGroup;
   errorMessage: string = '';
+  isSmallScreen: boolean = false;
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private breakpointObserver: BreakpointObserver
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
+  }
+
+  ngOnInit() {
+    this.breakpointObserver
+      .observe(['(max-width: 768px)'])
+      .subscribe((state: BreakpointState) => {
+        this.isSmallScreen = state.matches;
+      });
   }
 
   onLogin() {
@@ -52,8 +63,7 @@ export class LoginComponent {
     });
   }
 
-  loginWithGoogle() {
-  }
+  loginWithGoogle() {}
 
   goToRegister() {
     this.router.navigate(['/auth/register']);

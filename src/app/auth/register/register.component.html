@@ -66,5 +66,9 @@
 
       Continue with Google
     </button>
+    <div *ngIf="isSmallScreen" class="toggle-text">
+      Don’t have an account?
+      <a (click)="goToLogin()" class="sign-up-link">Login</a>
+    </div>
   </div>
 </div>
