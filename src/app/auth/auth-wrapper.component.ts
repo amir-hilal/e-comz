@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {
   trigger,
@@ -28,7 +28,13 @@ import {
     ]),
   ],
 })
-export class AuthWrapperComponent {
+export class AuthWrapperComponent implements AfterViewInit {
+  constructor(private cdr: ChangeDetectorRef) {}
+
+  ngAfterViewInit() {
+    this.cdr.detectChanges();
+  }
+
   prepareRoute(outlet: RouterOutlet) {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
   }

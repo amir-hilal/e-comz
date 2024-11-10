@@ -1,19 +1,44 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  CanActivate,
+  Router,
+  RouterStateSnapshot,
+} from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private cookieService: CookieService) {}
 
-  canActivate(): boolean {
-    if (this.authService.isAuthenticated()) {
-      return true;
-    } else {
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): boolean {
+    const isAuthenticated = this.authService.isAuthenticated();
+    console.log(isAuthenticated);
+    if (
+      isAuthenticated &&
+      (state.url === '/auth/login' || state.url === '/auth/register')
+    ) {
+      console.log('should redirect to home');
+      this.router.navigate(['/home']);
+      return false;
+    }
+
+    if (
+      !isAuthenticated &&
+      state.url !== '/auth/login' &&
+      state.url !== '/auth/register'
+    ) {
+      this.cookieService.delete('idToken');
       this.router.navigate(['/auth/login']);
       return false;
     }
+
+    return true;
   }
 }
