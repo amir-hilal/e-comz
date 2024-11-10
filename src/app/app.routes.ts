@@ -1,7 +1,10 @@
 import { Routes } from '@angular/router';
 import { AuthWrapperComponent } from './auth/auth-wrapper.component';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
+import { LoginComponent } from './auth/components/login/login.component';
+import { RegisterComponent } from './auth/components/register/register.component';
+import { AuthGuard } from './auth/guards/auth.guard';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { HomeComponent } from './components/home/home.component';
 
 export const routes: Routes = [
   {
@@ -19,6 +22,15 @@ export const routes: Routes = [
         data: { animation: 'RegisterPage' },
       },
     ],
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'home',
+    component: HomeComponent,
   },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];

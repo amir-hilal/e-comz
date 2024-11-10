@@ -12,23 +12,24 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
+
 @Component({
-  selector: 'app-login',
+  selector: 'app-register',
   standalone: true,
   imports: [
+    CommonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    CommonModule,
     MatIconModule,
   ],
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss'],
 })
-export class LoginComponent {
-  loginForm: FormGroup;
+export class RegisterComponent {
+  registerForm: FormGroup;
   errorMessage: string = '';
   isSmallScreen: boolean = false;
 
@@ -38,9 +39,10 @@ export class LoginComponent {
     private router: Router,
     private breakpointObserver: BreakpointObserver
   ) {
-    this.loginForm = this.fb.group({
+    this.registerForm = this.fb.group({
+      username: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
@@ -52,20 +54,23 @@ export class LoginComponent {
       });
   }
 
-  onLogin() {
-    const { email, password } = this.loginForm.value;
-    this.authService.login(email, password).subscribe({
-      next: () => {},
+  onRegister() {
+    const { email, password } = this.registerForm.value;
+    this.authService.register(email, password).subscribe({
+      next: (response) => {
+        console.log('Registration response:', response);
+        this.router.navigate(['/auth/login']);
+      },
       error: (error: any) => {
-        this.errorMessage = 'Login failed. Please check your credentials.';
-        console.error('Login error:', error);
+        this.errorMessage = 'Registration failed. Please try again.';
+        console.error('Registration error:', error);
       },
     });
   }
 
   loginWithGoogle() {}
 
-  goToRegister() {
-    this.router.navigate(['/auth/register']);
+  goToLogin() {
+    this.router.navigate(['/auth/login']);
   }
 }
