@@ -16,26 +16,14 @@ import {
   templateUrl: './auth-wrapper.component.html',
   styleUrls: ['./auth-wrapper.component.scss'],
   animations: [
-    trigger('routeAnimations', [
-      transition('LoginPage <=> RegisterPage', [
-        style({ position: 'relative' }),
-        query(':enter, :leave', [
-          style({
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-          }),
-        ]),
-        group([
-          query(':leave', [
-            animate('300ms ease-out', style({ opacity: 0, transform: 'translateX(-100%)' })),
-          ]),
-          query(':enter', [
-            style({ opacity: 0, transform: 'translateX(100%)' }),
-            animate('300ms ease-out', style({ opacity: 1, transform: 'translateX(0%)' })),
-          ]),
-        ]),
+    trigger('switchSectionAnimation', [
+      transition('LoginPage => RegisterPage', [
+        style({ opacity: 0, transform: 'translateX(100%)' }),
+        animate('300ms ease-out', style({ opacity: 1, transform: 'translateX(0%)' })),
+      ]),
+      transition('RegisterPage => LoginPage', [
+        style({ opacity: 0, transform: 'translateX(-100%)' }),
+        animate('300ms ease-out', style({ opacity: 1, transform: 'translateX(0%)' })),
       ]),
     ]),
   ],

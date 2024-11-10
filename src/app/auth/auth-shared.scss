@@ -21,8 +21,7 @@
   justify-content: center;
   text-align: center;
   border-radius: 10px;
-
-
+  transition: transform 0.3s ease, opacity 0.3s ease;
 
 
   p {
@@ -58,7 +57,7 @@
     font-size: 24px;
     font-weight: lighter;
     text-align: center;
-    margin-bottom: 20px;
+    margin: 0 0 20px;
     color: #ffffff;
 
   }
