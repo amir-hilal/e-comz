@@ -1,47 +1,45 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
-import { BehaviorSubject, from, Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { from, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private authState = new BehaviorSubject<firebase.User | null>(null);
-  authState$ = this.authState.asObservable();
+  private authState = signal<firebase.User | null>(null); // Auth state managed with signal
 
   constructor(private afAuth: AngularFireAuth) {
-    this.afAuth.authState.subscribe((user) => {
-      this.authState.next(user);
-    });
+    this.afAuth.authState.subscribe((user) => this.authState.set(user));
   }
 
-  register(
-    email: string,
-    password: string
-  ): Observable<firebase.auth.UserCredential> {
+  register(email: string, password: string) {
     return from(
       this.afAuth.createUserWithEmailAndPassword(email, password)
-    ).pipe(
-      tap((userCredential) => {
-        if (userCredential) {
-          console.log('Registration successful:', userCredential); 
-          this.authState.next(userCredential.user);
-        }
-      })
-    );
+    ).pipe(tap((userCredential) => this.authState.set(userCredential.user)));
   }
 
   login(email: string, password: string) {
     return from(this.afAuth.signInWithEmailAndPassword(email, password)).pipe(
-      tap((userCredential) => this.authState.next(userCredential.user))
+      tap((userCredential) => this.authState.set(userCredential.user))
     );
   }
 
   logout() {
     return from(this.afAuth.signOut()).pipe(
-      tap(() => this.authState.next(null))
+      tap(() => this.authState.set(null))
     );
+  }
+
+  getToken(): Promise<string | null> {
+    const user = this.authState();
+    if (user) {
+      return user.getIdToken();
+    }
+    return Promise.resolve(null);
+  }
+
+  isAuthenticated(): boolean {
+    return !!this.authState();
   }
 }
