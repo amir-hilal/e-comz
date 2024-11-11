@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../auth/services/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +18,7 @@ export class HomeComponent {
   onLogout() {
     this.authService.logout().subscribe({
       next: () => {
-        this.router.navigate(['/auth/login']); 
+        this.router.navigate(['/auth/login']);
       },
       error: (error) => console.error('Logout error:', error),
     });

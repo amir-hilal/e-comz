@@ -7,7 +7,7 @@ import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { CookieService } from 'ngx-cookie-service';
 import { firstValueFrom, from, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { User } from '../models/user.model';
+import { User } from '../../models/user.model';
 
 initializeApp(environment.firebase);
 

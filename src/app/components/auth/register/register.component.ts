@@ -12,24 +12,25 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../services/auth/auth.service';
 import { NotificationService } from '../../../shared/notification.services';
-import { AuthService } from '../../services/auth.service';
+
 @Component({
-  selector: 'app-login',
+  selector: 'app-register',
   standalone: true,
   imports: [
+    CommonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    CommonModule,
     MatIconModule,
   ],
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss'],
 })
-export class LoginComponent {
-  loginForm: FormGroup;
+export class RegisterComponent {
+  registerForm: FormGroup;
   errorMessage: string = '';
   isSmallScreen: boolean = false;
 
@@ -40,9 +41,10 @@ export class LoginComponent {
     private breakpointObserver: BreakpointObserver,
     private notificationService: NotificationService
   ) {
-    this.loginForm = this.fb.group({
-      identifier: ['', Validators.required],
-      password: ['', Validators.required],
+    this.registerForm = this.fb.group({
+      username: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
@@ -54,31 +56,29 @@ export class LoginComponent {
       });
   }
 
-  onLogin() {
-    const { identifier, password } = this.loginForm.value;
-
-    this.authService
-      .loginWithUsernameOrEmail(identifier, password)
-      .then(() => {
-        this.notificationService.showSuccess('Login successful!');
-        this.router.navigate(['/home']);
-      })
-      .catch((error: any) => {
+  onRegister() {
+    const { email, password, username } = this.registerForm.value;
+    this.authService.register(email, password, username).subscribe({
+      next: () => {
+        this.notificationService.showSuccess('Registration successful!');
+        this.router.navigate(['/auth/login']);
+      },
+      error: (error: any) => {
         this.notificationService.showError(error.message);
-        console.error('Login error:', error);
-      });
+        console.error('Registration error:', error);
+      },
+    });
   }
 
   async loginWithGoogle() {
     try {
       await this.authService.googleSignIn();
-      console.log('Google sign-in successful');
     } catch (error) {
       console.error('Google sign-in error:', error);
     }
   }
 
-  goToRegister() {
-    this.router.navigate(['/auth/register']);
+  goToLogin() {
+    this.router.navigate(['/auth/login']);
   }
 }

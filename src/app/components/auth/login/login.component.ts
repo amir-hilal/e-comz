@@ -13,24 +13,23 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { NotificationService } from '../../../shared/notification.services';
-import { AuthService } from '../../services/auth.service';
-
+import { AuthService } from '../../../services/auth/auth.service';
 @Component({
-  selector: 'app-register',
+  selector: 'app-login',
   standalone: true,
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    CommonModule,
     MatIconModule,
   ],
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
 })
-export class RegisterComponent {
-  registerForm: FormGroup;
+export class LoginComponent {
+  loginForm: FormGroup;
   errorMessage: string = '';
   isSmallScreen: boolean = false;
 
@@ -41,10 +40,9 @@ export class RegisterComponent {
     private breakpointObserver: BreakpointObserver,
     private notificationService: NotificationService
   ) {
-    this.registerForm = this.fb.group({
-      username: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+    this.loginForm = this.fb.group({
+      identifier: ['', Validators.required],
+      password: ['', Validators.required],
     });
   }
 
@@ -56,29 +54,31 @@ export class RegisterComponent {
       });
   }
 
-  onRegister() {
-    const { email, password, username } = this.registerForm.value;
-    this.authService.register(email, password, username).subscribe({
-      next: () => {
-        this.notificationService.showSuccess('Registration successful!');
-        this.router.navigate(['/auth/login']);
-      },
-      error: (error: any) => {
+  onLogin() {
+    const { identifier, password } = this.loginForm.value;
+
+    this.authService
+      .loginWithUsernameOrEmail(identifier, password)
+      .then(() => {
+        this.notificationService.showSuccess('Login successful!');
+        this.router.navigate(['/home']);
+      })
+      .catch((error: any) => {
         this.notificationService.showError(error.message);
-        console.error('Registration error:', error);
-      },
-    });
+        console.error('Login error:', error);
+      });
   }
 
   async loginWithGoogle() {
     try {
       await this.authService.googleSignIn();
+      console.log('Google sign-in successful');
     } catch (error) {
       console.error('Google sign-in error:', error);
     }
   }
 
-  goToLogin() {
-    this.router.navigate(['/auth/login']);
+  goToRegister() {
+    this.router.navigate(['/auth/register']);
   }
 }

@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 import { AppComponent } from './app/app.component';
 import { routes } from './app/app.routes';
-import { AuthInterceptor } from './app/auth/interceptors/auth.interceptor';
+import { AuthInterceptor } from './app/services/interceptors/auth.interceptor';
 import { environment } from './environments/environment';
 
 if (environment.production) {
@@ -20,7 +20,7 @@ bootstrapApplication(AppComponent, {
     provideRouter(routes),
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth()), 
+    provideAuth(() => getAuth()),
     importProvidersFrom(BrowserAnimationsModule),
     {
       provide: HTTP_INTERCEPTORS,

@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import { AuthWrapperComponent } from './auth/auth-wrapper.component';
-import { LoginComponent } from './auth/components/login/login.component';
-import { RegisterComponent } from './auth/components/register/register.component';
-import { AuthGuard } from './auth/guards/auth.guard';
+import { AuthWrapperComponent } from './components/auth/auth-wrapper.component';
+import { AuthGuard } from './services/guards/auth.guard';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { RegisterComponent } from './components/auth/register/register.component';
 
 export const routes: Routes = [
   {
