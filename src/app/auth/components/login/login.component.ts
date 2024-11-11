@@ -12,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
+import { NotificationService } from '../../../shared/notification.services';
 import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-login',
@@ -36,7 +37,8 @@ export class LoginComponent {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    private notificationService: NotificationService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -55,9 +57,14 @@ export class LoginComponent {
   onLogin() {
     const { email, password } = this.loginForm.value;
     this.authService.login(email, password).subscribe({
-      next: () => {},
+      next: () => {
+        this.notificationService.showSuccess('Login successful!');
+        this.router.navigate(['/home']);
+      },
       error: (error: any) => {
-        this.errorMessage = 'Login failed. Please check your credentials.';
+        this.notificationService.showError(
+          error.message
+        );
         console.error('Login error:', error);
       },
     });

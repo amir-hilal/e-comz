@@ -12,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
+import { NotificationService } from '../../../shared/notification.services';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -37,7 +38,8 @@ export class RegisterComponent {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    private notificationService: NotificationService
   ) {
     this.registerForm = this.fb.group({
       username: ['', [Validators.required]],
@@ -57,12 +59,12 @@ export class RegisterComponent {
   onRegister() {
     const { email, password } = this.registerForm.value;
     this.authService.register(email, password).subscribe({
-      next: (response) => {
-        console.log('Registration response:', response);
+      next: () => {
+        this.notificationService.showSuccess('Registration successful!');
         this.router.navigate(['/auth/login']);
       },
       error: (error: any) => {
-        this.errorMessage = 'Registration failed. Please try again.';
+        this.notificationService.showError(error.message);
         console.error('Registration error:', error);
       },
     });
