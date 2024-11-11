@@ -3,8 +3,8 @@
     <h2>Welcome Back!</h2>
     <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="form">
       <mat-form-field appearance="fill" class="input-field">
-        <mat-label>Username or email</mat-label>
-        <input matInput formControlName="email" />
+        <mat-label>Email or Username</mat-label>
+        <input matInput formControlName="identifier" />
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="input-field">

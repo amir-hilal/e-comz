@@ -57,8 +57,8 @@ export class RegisterComponent {
   }
 
   onRegister() {
-    const { email, password } = this.registerForm.value;
-    this.authService.register(email, password).subscribe({
+    const { email, password, username } = this.registerForm.value;
+    this.authService.register(email, password, username).subscribe({
       next: () => {
         this.notificationService.showSuccess('Registration successful!');
         this.router.navigate(['/auth/login']);
@@ -69,6 +69,7 @@ export class RegisterComponent {
       },
     });
   }
+
   async loginWithGoogle() {
     try {
       await this.authService.googleSignIn();

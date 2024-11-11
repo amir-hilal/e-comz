@@ -41,7 +41,7 @@ export class LoginComponent {
     private notificationService: NotificationService
   ) {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      identifier: ['', Validators.required],
       password: ['', Validators.required],
     });
   }
@@ -55,19 +55,18 @@ export class LoginComponent {
   }
 
   onLogin() {
-    const { email, password } = this.loginForm.value;
-    this.authService.login(email, password).subscribe({
-      next: () => {
+    const { identifier, password } = this.loginForm.value;
+
+    this.authService
+      .loginWithUsernameOrEmail(identifier, password)
+      .then(() => {
         this.notificationService.showSuccess('Login successful!');
         this.router.navigate(['/home']);
-      },
-      error: (error: any) => {
-        this.notificationService.showError(
-          error.message
-        );
+      })
+      .catch((error: any) => {
+        this.notificationService.showError(error.message);
         console.error('Login error:', error);
-      },
-    });
+      });
   }
 
   async loginWithGoogle() {

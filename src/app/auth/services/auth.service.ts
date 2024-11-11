@@ -1,11 +1,13 @@
 import { Injectable, signal } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { CookieService } from 'ngx-cookie-service';
-import { from, tap } from 'rxjs';
+import { firstValueFrom, from, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
+import { User } from '../models/user.model';
 
 initializeApp(environment.firebase);
 
@@ -18,7 +20,8 @@ export class AuthService {
   constructor(
     private afAuth: AngularFireAuth,
     private cookieService: CookieService,
-    private router: Router
+    private router: Router,
+    private firestore: AngularFirestore
   ) {
     const tokenExists = !!this.cookieService.get('idToken');
     if (tokenExists) {
@@ -82,20 +85,27 @@ export class AuthService {
       });
   }
 
-  register(email: string, password: string) {
+  register(email: string, password: string, username: string) {
     return from(
       this.afAuth.createUserWithEmailAndPassword(email, password)
     ).pipe(
-      tap((userCredential) => {
-        this.authState.set(userCredential.user);
-        userCredential.user?.getIdToken().then((token) => {
-          if (this.cookieService.get('idToken') !== token) {
-            this.cookieService.set('idToken', token, {
-              secure: true,
-              sameSite: 'Strict',
-            });
-          }
-        });
+      tap(async (userCredential) => {
+        const user = userCredential.user;
+        if (user) {
+          this.authState.set(user);
+          user.getIdToken().then((token) => {
+            if (this.cookieService.get('idToken') !== token) {
+              this.cookieService.set('idToken', token, {
+                secure: true,
+                sameSite: 'Strict',
+              });
+            }
+          });
+          await this.firestore.collection('users').doc(user.uid).set({
+            username: username,
+            email: email,
+          });
+        }
       })
     );
   }
@@ -115,6 +125,32 @@ export class AuthService {
         this.router.navigate(['/home']);
       })
     );
+  }
+
+  async loginWithUsernameOrEmail(identifier: string, password: string) {
+    let email = identifier;
+
+    if (!identifier.includes('@')) {
+      const usersRef = this.firestore.collection<User>('users', (ref) =>
+        ref.where('username', '==', identifier)
+      );
+
+      try {
+        const querySnapshot = await firstValueFrom(usersRef.get());
+
+        if (!querySnapshot?.empty) {
+          email = querySnapshot.docs[0].data().email;
+        } else {
+          throw new Error('Username not found');
+        }
+      } catch (error) {
+        console.error('Error querying username:', error);
+        throw new Error('Username lookup failed');
+      }
+    }
+
+    // Use email and password for login
+    return this.login(email, password);
   }
 
   logout() {
