@@ -67,8 +67,13 @@ export class RegisterComponent {
       },
     });
   }
-
-  loginWithGoogle() {}
+  async loginWithGoogle() {
+    try {
+      await this.authService.googleSignIn();
+    } catch (error) {
+      console.error('Google sign-in error:', error);
+    }
+  }
 
   goToLogin() {
     this.router.navigate(['/auth/login']);

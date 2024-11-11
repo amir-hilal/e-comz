@@ -20,7 +20,7 @@ bootstrapApplication(AppComponent, {
     provideRouter(routes),
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth()),
+    provideAuth(() => getAuth()), 
     importProvidersFrom(BrowserAnimationsModule),
     {
       provide: HTTP_INTERCEPTORS,

@@ -18,11 +18,11 @@ import {
   animations: [
     trigger('switchSectionAnimation', [
       transition('LoginPage => RegisterPage', [
-        style({ opacity: 0, transform: 'translateX(100%)' }),
+        style({  transform: 'translateX(100%)' }),
         animate('300ms ease-out', style({ opacity: 1, transform: 'translateX(0%)' })),
       ]),
       transition('RegisterPage => LoginPage', [
-        style({ opacity: 0, transform: 'translateX(-100%)' }),
+        style({ transform: 'translateX(-100%)' }),
         animate('300ms ease-out', style({ opacity: 1, transform: 'translateX(0%)' })),
       ]),
     ]),
