@@ -1,28 +1,6 @@
 <div class="home-container">
-  <h1>{{ title }}</h1>
-  <p>Explore our collection of amazing products and get the best deals!</p>
-
-  <button mat-raised-button color="primary" routerLink="/products">
-    Shop Now
-  </button>
-</div>
-
-<div class="home-container">
   <!-- Header -->
-  <header class="header">
-    <div class="logo">E-Comz</div>
-    <nav>
-      <a href="#">New arrivals</a>
-      <a href="#">Products</a>
-      <a href="#">About us</a>
-      <a href="#">Support</a>
-    </nav>
-    <div class="auth-links">
-      <button mat-button color="primary" (click)="onLogout()">Logout</button>
-
-      <a href="#" class="cart-icon">🛒</a>
-    </div>
-  </header>
+  <app-navbar></app-navbar>
 
   <!-- Hero Section -->
   <section class="hero">

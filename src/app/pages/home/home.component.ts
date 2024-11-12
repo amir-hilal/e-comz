@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { ProductsService } from '../../services/api/products.service';
 import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
-
+  imports: [CommonModule, NavbarComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
