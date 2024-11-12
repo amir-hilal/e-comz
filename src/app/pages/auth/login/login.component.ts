@@ -54,19 +54,17 @@ export class LoginComponent {
       });
   }
 
-  onLogin() {
+  async onLogin() {
     const { identifier, password } = this.loginForm.value;
 
-    this.authService
-      .loginWithUsernameOrEmail(identifier, password)
-      .then(() => {
-        this.notificationService.showSuccess('Login successful!');
-        this.router.navigate(['/home']);
-      })
-      .catch((error: any) => {
-        this.notificationService.showError(error.message);
-        console.error('Login error:', error);
-      });
+    try {
+      await this.authService.loginWithUsernameOrEmail(identifier, password);
+      this.notificationService.showSuccess('Login successful!');
+      this.router.navigate(['/home']);
+    } catch (error: any) {
+      this.notificationService.showError(error.message);
+      console.error('Login error:', error);
+    }
   }
 
   async loginWithGoogle() {
