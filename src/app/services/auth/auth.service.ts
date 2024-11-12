@@ -49,40 +49,31 @@ export class AuthService {
     const auth = getAuth();
     const provider = new GoogleAuthProvider();
 
-    return from(signInWithPopup(auth, provider))
-      .pipe(
-        tap((userCredential) => {
-          if (userCredential && userCredential.user) {
-            this.authState.set(userCredential.user);
+    return from(signInWithPopup(auth, provider)).pipe(
+      tap((userCredential) => {
+        if (userCredential && userCredential.user) {
+          this.authState.set(userCredential.user);
 
-            userCredential.user.getIdToken().then((token) => {
-              if (this.cookieService.get('idToken') !== token) {
-                this.cookieService.set('idToken', token, {
-                  secure: true,
-                  sameSite: 'Strict',
-                });
-              }
-            });
+          userCredential.user.getIdToken().then((token) => {
+            if (this.cookieService.get('idToken') !== token) {
+              this.cookieService.set('idToken', token, {
+                secure: true,
+                sameSite: 'Strict',
+              });
+            }
+          });
 
-            this.router.navigate(['/home']);
-          } else {
-            console.error('No user credential returned from Google sign-in');
-          }
-        }),
-        tap({
-          error: (error) => {
-            console.error('Google sign-in error:', error);
-          },
-        })
-      )
-      .subscribe({
-        next: () => {
-          console.log('Google sign-in and navigation process completed.');
-        },
+          this.router.navigate(['/home']);
+        } else {
+          console.error('No user credential returned from Google sign-in');
+        }
+      }),
+      tap({
         error: (error) => {
-          console.error('Error in Google sign-in observable chain:', error);
+          console.error('Google sign-in error:', error);
         },
-      });
+      })
+    );
   }
 
   register(email: string, password: string, username: string) {
