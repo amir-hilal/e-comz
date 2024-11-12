@@ -37,7 +37,18 @@ $e-comz-theme: mat.define-theme((
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0;   font-family: "Inter", serif;
+  font-optical-sizing: auto; }
+
+*::before,
+*::after {
+  box-sizing: border-box; /* Ensures padding and borders are included in element width */
+}
+
+div {
+  max-width: 100%; /* Prevents <div> elements from exceeding parent's width */
+  overflow: hidden; /* Hides any content that might overflow */
+}
 
 
 .snackbar-success .mdc-snackbar__surface {
