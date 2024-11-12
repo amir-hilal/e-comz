@@ -3,27 +3,45 @@
   flex-direction: column;
   align-items: center;
   gap: 2rem;
+  padding: 0rem 6rem;
+
 }
 
 .hero {
-  text-align: center;
-  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  width: 100%;
 
-  h1 {
-    font-size: 2.5rem;
+  h1{
+    letter-spacing: 7px;
+    font-size: 50px;
     font-weight: bold;
-
-    span {
-      font-style: italic;
-    }
+    margin: 10px 0;
   }
 
-  p {
-    font-size: 1.2rem;
-    margin-top: 0.5rem;
-    color: rgba(255, 255, 255, 0.8);
+  .row{
+    display: flex;
+    justify-content: space-between;
   }
+
+  .gap {
+    display: flex;
+    align-self: center;
+    width: 100px;
+    height: 3px;
+    background-color: #7A551E;
+  }
+
+  p{
+    font-style: italic;
+    font-size: 0.1rem !important;
+    align-self: center;
+    width: 20%;
+  }
+
 }
+
 
 .search-bar {
   width: 50%;
