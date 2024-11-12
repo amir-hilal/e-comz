@@ -8,8 +8,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 import { AppComponent } from './app/app.component';
 import { routes } from './app/app.routes';
-import { AuthInterceptor } from './app/services/interceptors/auth.interceptor';
 import { environment } from './environments/environment';
+import { AuthInterceptor } from './app/services/interceptors/auth.interceptor';
 
 if (environment.production) {
   enableProdMode();

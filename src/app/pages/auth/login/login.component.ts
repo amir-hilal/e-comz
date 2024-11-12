@@ -12,8 +12,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
-import { NotificationService } from '../../../shared/notification.services';
 import { AuthService } from '../../../services/auth/auth.service';
+import { NotificationService } from '../../../shared/notification.services';
 @Component({
   selector: 'app-login',
   standalone: true,

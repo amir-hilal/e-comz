@@ -12,7 +12,11 @@ import { AuthService } from '../auth/auth.service';
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router, private cookieService: CookieService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private cookieService: CookieService
+  ) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
