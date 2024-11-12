@@ -5,6 +5,66 @@
   <button mat-raised-button color="primary" routerLink="/products">
     Shop Now
   </button>
-  <button mat-button color="primary" (click)="onLogout()">Logout</button>
+</div>
 
+<div class="home-container">
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">E-Comz</div>
+    <nav>
+      <a href="#">New arrivals</a>
+      <a href="#">Products</a>
+      <a href="#">About us</a>
+      <a href="#">Support</a>
+    </nav>
+    <div class="auth-links">
+      <button mat-button color="primary" (click)="onLogout()">Logout</button>
+
+      <a href="#" class="cart-icon">🛒</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Express <span>Through</span> Yourself <span>Style</span></h1>
+    <p>
+      Your one-stop shop for stylish and affordable jewelry to express your
+      unique style.
+    </p>
+  </section>
+
+  <!-- Search Bar -->
+  <div class="search-bar">
+    <input type="text" placeholder="Search for items..." />
+  </div>
+
+  <!-- Products Section -->
+  <div class="products-section">
+    <div class="product-grid">
+      <div *ngFor="let product of products" class="product-card">
+        <img [src]="product.image" alt="{{ product.title }}" />
+        <h3>{{ product.title }}</h3>
+        <p>${{ product.price }}</p>
+      </div>
+    </div>
+
+    <!-- Product Details Section -->
+    <div class="product-details">
+      <img src="path/to/product-image" alt="Featured Product" />
+      <h3>White Gold Plated Princess</h3>
+      <p>Description of the featured product...</p>
+      <button>Add to Cart</button>
+    </div>
+
+    <!-- Categories Section -->
+    <!-- <div class="categories">
+      <h3>Explore Categories</h3>
+      <div class="category-grid">
+        <div class="category-card" *ngFor="let category of categories">
+          <img src="path/to/category-image" alt="{{ category.name }}" />
+          <h4>{{ category.name }}</h4>
+        </div>
+      </div>
+    </div> -->
+  </div>
 </div>
