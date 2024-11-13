@@ -25,6 +25,7 @@
       </div>
       <div class="product-grid">
         <div *ngFor="let product of products" class="product-card">
+          <div class="bg-circle"></div>
           <div class="product-info-row">
             <h3 class="product-title">{{ product.title }}</h3>
             <p class="product-category">{{ product.category }}</p>
@@ -33,7 +34,6 @@
             <img [src]="product.image" alt="{{ product.title }}" />
           </div>
           <div class="product-price-row">${{ product.price }}</div>
-          <div class="bg-circle"></div>
         </div>
       </div>
     </div>

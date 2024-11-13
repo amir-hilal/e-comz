@@ -70,6 +70,7 @@
         background-position: 13px 9px;
         background-size: 16px 16px;
         background-repeat: no-repeat;
+        color: #F0F0F0;
       }
       input::placeholder {
         font-weight: lighter;
@@ -79,7 +80,8 @@
       }
 
       input[type=text]:focus {
-        border: 1px solid #555;
+        border: 1px solid #ffe59e;
+        color: #F0F0F0;
       }
     }
 
@@ -88,28 +90,28 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
       flex-grow: 1;
-
+      margin-top: 1rem;
       .product-card {
+        aspect-ratio: 1/1;
         background: transparent;
         position: relative;
         display: flex;
         width: 100%;
         flex-direction: column;
-        justify-content: center;
+        justify-content: space-between;
         transition: transform 0.2s;
-
-
         .product-info-row{
-
+          z-index: 1;
+          align-self: flex-start;
           .product-title{
             margin: 0;
-            font-size: 1rem;
+            font-size: .7rem;
             text-wrap: nowrap;
             text-overflow: ellipsis;
           }
 
           .product-category{
-            font-size: .7rem;
+            font-size: .5rem;
             font-weight: normal;
             margin: 4px 0;
             color: #C3C3C3;
@@ -120,62 +122,37 @@
 
         .product-image-row{
           width: 100%;
+          padding: 0;
+          z-index: 1;
+          display: flex;
+          justify-content: center;
+          margin-left:.5rem;
 
           img{
-            width: 100%;
+            width: 50%;
+            aspect-ratio: 1/1;
+            padding: 0;
+            margin: 0;
           }
         }
 
         .product-price-row{
           text-align: right;
+          font-size: small;
+          z-index: 1;
+
         }
         // &:hover {
         //   transform: scale(1.05);
         // }
 
-        // .product-image-container {
-        //   width: 120px;
-        //   height: 120px;
-        //   background-color: #b19c5f; /* Background color similar to your provided image */
-        //   border-radius: 50%;
-        //   display: flex;
-        //   align-items: center;
-        //   justify-content: center;
-        //   overflow: hidden;
-        // }
-
-        // img {
-        //   max-width: 100%;
-        //   max-height: 100%;
-        //   border-radius: 50%;
-        // }
-
-        // .product-info {
-        //   text-align: left;
-        //   position: absolute;
-        //   top: 1rem;
-        //   left: 1rem;
-
-        //   .product-title {
-        //     font-size: 0.9rem;
-        //     font-weight: bold;
-        //     margin: 0;
-        //   }
-
-        //   .product-category {
-        //     font-size: 0.8rem;
-        //     color: rgba(255, 255, 255, 0.7); /* Lightened text color for category */
-        //     margin: 0;
-        //   }
-        // }
-
-        // .product-price {
-        //   position: absolute;
-        //   bottom: 1rem;
-        //   right: 1rem;
-        //   font-size: 1rem;
-        //   font-weight: bold;
-        // }
+        .bg-circle{
+          background-color: #00031E39;
+          border-radius: 50%;
+          position: absolute;
+          width: 100%;
+          height: 100%;
+        }
       }
     }
 
