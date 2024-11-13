@@ -21,10 +21,14 @@
     <!-- products and search -->
     <div class="products-container">
       <div class="search-bar">
-        <input type="text" placeholder="Search for items..." />
+        <input
+          type="text"
+          placeholder="Search for items..."
+          [(ngModel)]="searchTerm"
+        />
       </div>
       <div class="product-grid">
-        <div *ngFor="let product of products()" class="product-card">
+        <div *ngFor="let product of filteredProducts()" class="product-card">
           <div class="bg-circle"></div>
           <div class="product-info-row">
             <h3 class="product-title">{{ product.title }}</h3>
