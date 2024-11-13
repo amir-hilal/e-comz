@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, signal, computed } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { ProductsService } from '../../services/api/products.service';
 import { AuthService } from '../../services/auth/auth.service';
 
@@ -14,13 +14,14 @@ import { AuthService } from '../../services/auth/auth.service';
 })
 export class HomeComponent {
   products = signal<any[]>([]);
-  loading = signal<boolean>(false);
-  searchTerm = signal<string>('');
   filteredProducts = computed(() =>
     this.products().filter((product) =>
       product.title.toLowerCase().includes(this.searchTerm().toLowerCase())
     )
   );
+  loading = signal<boolean>(false);
+  searchTerm = signal<string>('');
+  selectedProduct = signal<any | null>(null); 
   categories: string[] = [
     'Electronics',
     'Jewelry',
@@ -28,6 +29,7 @@ export class HomeComponent {
     'Women Clothing',
   ];
   title = 'Welcome to E-Comz';
+
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -45,6 +47,10 @@ export class HomeComponent {
       this.products.update((prevProducts) => [...prevProducts, ...data]);
       this.loading.set(false);
     });
+  }
+
+  selectProduct(product: any) {
+    this.selectedProduct.set(product);
   }
 
   onLogout() {
