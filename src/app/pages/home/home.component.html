@@ -51,7 +51,11 @@
     <!-- product details / explore categories -->
     <div class="products-details-categories">
       <!-- product details  -->
-      <div class="product-details" *ngIf="selectedProduct()">
+      <div
+        class="product-details"
+        *ngIf="selectedProduct()"
+        [@fadeInOut]="animationState()"
+      >
         <img
           [src]="selectedProduct().image"
           alt="{{ selectedProduct().title }}"
