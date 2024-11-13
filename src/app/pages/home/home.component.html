@@ -24,7 +24,7 @@
         <input type="text" placeholder="Search for items..." />
       </div>
       <div class="product-grid">
-        <div *ngFor="let product of products" class="product-card">
+        <div *ngFor="let product of products()" class="product-card">
           <div class="bg-circle"></div>
           <div class="product-info-row">
             <h3 class="product-title">{{ product.title }}</h3>
@@ -36,6 +36,8 @@
           <div class="product-price-row">${{ product.price }}</div>
         </div>
       </div>
+
+      <div *ngIf="loading()">Loading...</div>
     </div>
 
     <!-- product details / explore categories -->
