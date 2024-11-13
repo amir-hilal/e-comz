@@ -16,38 +16,43 @@
     </div>
   </section>
 
-  <!-- Search Bar -->
-  <div class="search-bar">
-    <input type="text" placeholder="Search for items..." />
-  </div>
-
-  <!-- Products Section -->
+  <!-- product listing and details / explore categories -->
   <div class="products-section">
-    <div class="product-grid">
-      <div *ngFor="let product of products" class="product-card">
-        <img [src]="product.image" alt="{{ product.title }}" />
-        <h3>{{ product.title }}</h3>
-        <p>${{ product.price }}</p>
+    <!-- products and search -->
+    <div class="products-container">
+      <div class="search-bar">
+        <input type="text" placeholder="Search for items..." />
+      </div>
+      <div class="product-grid">
+        <div *ngFor="let product of products" class="product-card">
+          <div class="product-info-row">
+            <h3 class="product-title">{{ product.title }}</h3>
+            <p class="product-category">{{ product.category }}</p>
+          </div>
+          <div class="product-image-row">
+            <img [src]="product.image" alt="{{ product.title }}" />
+          </div>
+          <div class="product-price-row">${{ product.price }}</div>
+          <div class="bg-circle"></div>
+        </div>
       </div>
     </div>
 
-    <!-- Product Details Section -->
-    <div class="product-details">
-      <img src="path/to/product-image" alt="Featured Product" />
-      <h3>White Gold Plated Princess</h3>
-      <p>Description of the featured product...</p>
-      <button>Add to Cart</button>
+    <!-- product details / explore categories -->
+    <div class="products-details-categories">
+      <!-- product details  -->
+      <div class="product-details"></div>
+
+      <!-- Categories Section -->
+      <div class="categories">
+        <h3>Explore Categories</h3>
+        <div class="category-grid">
+          <div class="category-card" *ngFor="let category of categories">
+            <img src="path/to/category-image" alt="category" />
+            <h4>category</h4>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-
-  <!-- Categories Section -->
-  <!-- <div class="categories">
-    <h3>Explore Categories</h3>
-    <div class="category-grid">
-      <div class="category-card" *ngFor="let category of categories">
-        <img src="path/to/category-image" alt="{{ category.name }}" />
-        <h4>{{ category.name }}</h4>
-      </div>
-    </div>
-  </div> -->
 </div>
