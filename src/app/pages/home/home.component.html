@@ -28,11 +28,7 @@
         />
       </div>
       <div class="product-grid">
-        <div
-          *ngFor="let product of filteredProducts()"
-          class="product-card"
-          (click)="selectProduct(product)"
-        >
+        <div *ngFor="let product of filteredProducts()" class="product-card">
           <div class="bg-circle"></div>
           <div class="product-info-row">
             <h3 class="product-title">{{ product.title }}</h3>
@@ -48,26 +44,11 @@
       <div *ngIf="loading()">Loading...</div>
     </div>
 
-    <!-- product details / explore categories -->
+    <!-- featured product / explore categories -->
     <div class="products-details-categories">
-      <!-- product details  -->
-      <div
-        class="product-details"
-        *ngIf="selectedProduct()"
-        [@fadeInOut]="animationState()"
-      >
-        <img
-          [src]="selectedProduct().image"
-          alt="{{ selectedProduct().title }}"
-          class="product-detail-image"
-        />
-        <h2>{{ selectedProduct().title }}</h2>
-        <p class="product-detail-category">{{ selectedProduct().category }}</p>
-        <p class="product-detail-description">
-          {{ selectedProduct().description }}
-        </p>
-        <p class="product-detail-price">${{ selectedProduct().price }}</p>
-      </div>
+      <!-- featured product  -->
+      <div class="product-details"></div>
+
       <!-- Categories Section -->
       <div class="categories">
         <h3>Explore Categories</h3>

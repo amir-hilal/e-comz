@@ -28,14 +28,13 @@ import { AuthService } from '../../services/auth/auth.service';
 })
 export class HomeComponent {
   products = signal<any[]>([]);
+  loading = signal<boolean>(false);
+  searchTerm = signal<string>('');
   filteredProducts = computed(() =>
     this.products().filter((product) =>
       product.title.toLowerCase().includes(this.searchTerm().toLowerCase())
     )
   );
-  loading = signal<boolean>(false);
-  searchTerm = signal<string>('');
-  selectedProduct = signal<any | null>(null);
   recommendedProduct = signal<any | null>(null);
   animationState = signal<boolean>(true);
 
@@ -71,14 +70,7 @@ export class HomeComponent {
     if (productsList.length > 0) {
       const randomIndex = Math.floor(Math.random() * productsList.length);
       this.recommendedProduct.set(productsList[randomIndex]);
-      this.selectedProduct.set(this.recommendedProduct());
     }
-  }
-
-  selectProduct(product: any) {
-    this.animationState.set(!this.animationState()); // Toggle the animation state to trigger reanimation
-    this.selectedProduct.set(product);
-    this.recommendedProduct.set(null); // Clear the recommended product
   }
 
   onLogout() {
