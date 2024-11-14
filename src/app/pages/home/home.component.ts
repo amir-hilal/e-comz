@@ -1,5 +1,5 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, computed, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -9,7 +9,7 @@ import { AuthService } from '../../services/auth/auth.service';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, NgOptimizedImage],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   animations: [
@@ -32,7 +32,8 @@ export class HomeComponent {
     )
   );
   recommendedProduct = signal<any | null>(null);
-  showFeaturedProduct = signal<boolean>(false); // Control visibility for animation
+  showFeaturedProduct = signal<boolean>(false);
+  imageLoaded = signal<boolean>(false);
 
   categories: string[] = [
     'Electronics',
@@ -49,16 +50,21 @@ export class HomeComponent {
 
   ngOnInit() {
     this.fetchProducts();
-    this.startFeaturedProductRotation();
   }
 
   fetchProducts() {
     this.loading.set(true);
 
-    this.productsService.getProducts().subscribe((data: any) => {
-      this.products.set(data);
-      this.selectRandomRecommendedProduct();
-      this.loading.set(false);
+    this.productsService.getProducts().subscribe({
+      next: (data: any) => {
+        this.products.set(data);
+        this.loading.set(false);
+        this.selectRandomRecommendedProduct();
+        this.startFeaturedProductRotation();
+      },
+      error: () => {
+        this.loading.set(false);
+      },
     });
   }
 
@@ -67,10 +73,14 @@ export class HomeComponent {
     if (productsList.length > 0) {
       const randomIndex = Math.floor(Math.random() * productsList.length);
       this.recommendedProduct.set(productsList[randomIndex]);
+      this.imageLoaded.set(false);
     }
   }
 
   startFeaturedProductRotation() {
+    this.selectRandomRecommendedProduct();
+    this.showFeaturedProduct.set(true);
+
     setInterval(() => {
       this.showFeaturedProduct.set(false);
 
@@ -78,7 +88,7 @@ export class HomeComponent {
         this.selectRandomRecommendedProduct();
         this.showFeaturedProduct.set(true);
       }, 500);
-    }, 9000); 
+    }, 9000);
   }
 
   onLogout() {

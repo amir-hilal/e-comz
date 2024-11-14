@@ -171,13 +171,39 @@
       max-width: 300px;
       text-align: center;
       transition: opacity 300ms ease-in-out;
-
+      height: 500px;
       .featured-product-image {
-        max-width: 100%;
-        border-radius: 8px;
-        margin-bottom: 1rem;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        position: relative;
+
+        img {
+          width: 100%; /* Restrict image size */
+          height: auto;
+          max-width: 150px;
+          aspect-ratio: 1/1;
+          border-radius: 8px;
+          object-fit: cover;
+          transition: opacity 300ms ease-in-out;
+
+        }
+
+        .image-placeholder {
+          position: absolute;
+          width: 100px;
+          height: 100%;
+          background-color: #a0a0a030; /* Light gray for placeholder */
+          border-radius: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
       }
 
+      h2, .featured-product-category, .featured-product-price {
+        transition: opacity 300ms ease-in-out;
+      }
       h2 {
         font-size: 1.5rem;
         font-weight: bold;

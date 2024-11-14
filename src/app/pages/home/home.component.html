@@ -46,17 +46,34 @@
 
     <!-- featured product  -->
     <div class="products-details-categories">
-      <div class="featured-product" *ngIf="showFeaturedProduct()" @fadeInOut>
-        <img
-          [src]="recommendedProduct().image"
-          alt="{{ recommendedProduct().title }}"
-          class="featured-product-image"
-        />
-        <h2>{{ recommendedProduct().title }}</h2>
-        <p class="featured-product-category">
-          {{ recommendedProduct().category }}
-        </p>
-        <p class="featured-product-price">${{ recommendedProduct().price }}</p>
+      <div class="featured-product">
+        <!-- Container for synchronized fade in/out animation -->
+        <div *ngIf="showFeaturedProduct() && recommendedProduct()" @fadeInOut>
+          <h2>{{ recommendedProduct()?.title }}</h2>
+          <p class="featured-product-category">
+            {{ recommendedProduct()?.description }}
+          </p>
+          <!-- Image with fadeInOut animation and placeholder -->
+          <div class="featured-product-image">
+            <div class="image-placeholder" *ngIf="!imageLoaded()"></div>
+            <img
+              *ngIf="recommendedProduct()"
+              [src]="recommendedProduct()?.image"
+              alt="{{ recommendedProduct()?.title }}"
+              (load)="imageLoaded.set(true)"
+            />
+          </div>
+
+          <!-- Title, Category, and Price -->
+
+          <p class="featured-product-category">
+            {{ recommendedProduct()?.category }}
+          </p>
+
+          <p class="featured-product-price">
+            ${{ recommendedProduct()?.price }}
+          </p>
+        </div>
       </div>
 
       <!-- Categories Section -->
