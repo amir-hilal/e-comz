@@ -16,13 +16,9 @@ import { AuthService } from '../../services/auth/auth.service';
     trigger('fadeInOut', [
       transition(':enter', [
         style({ opacity: 0 }),
-        animate('300ms ease-in', style({ opacity: 1 })),
+        animate('500ms ease-in', style({ opacity: 1 })),
       ]),
-      transition(':leave', [animate('300ms ease-out', style({ opacity: 0 }))]),
-      transition('* => *', [
-        style({ opacity: 0 }),
-        animate('400ms ease-in-out', style({ opacity: 1 })),
-      ]),
+      transition(':leave', [animate('500ms ease-out', style({ opacity: 0 }))]),
     ]),
   ],
 })
@@ -36,7 +32,7 @@ export class HomeComponent {
     )
   );
   recommendedProduct = signal<any | null>(null);
-  animationState = signal<boolean>(true);
+  showFeaturedProduct = signal<boolean>(false); // Control visibility for animation
 
   categories: string[] = [
     'Electronics',
@@ -53,6 +49,7 @@ export class HomeComponent {
 
   ngOnInit() {
     this.fetchProducts();
+    this.startFeaturedProductRotation();
   }
 
   fetchProducts() {
@@ -71,6 +68,17 @@ export class HomeComponent {
       const randomIndex = Math.floor(Math.random() * productsList.length);
       this.recommendedProduct.set(productsList[randomIndex]);
     }
+  }
+
+  startFeaturedProductRotation() {
+    setInterval(() => {
+      this.showFeaturedProduct.set(false);
+
+      setTimeout(() => {
+        this.selectRandomRecommendedProduct();
+        this.showFeaturedProduct.set(true);
+      }, 500);
+    }, 9000); 
   }
 
   onLogout() {

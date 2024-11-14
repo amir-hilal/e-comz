@@ -44,10 +44,20 @@
       <div *ngIf="loading()">Loading...</div>
     </div>
 
-    <!-- featured product / explore categories -->
+    <!-- featured product  -->
     <div class="products-details-categories">
-      <!-- featured product  -->
-      <div class="product-details"></div>
+      <div class="featured-product" *ngIf="showFeaturedProduct()" @fadeInOut>
+        <img
+          [src]="recommendedProduct().image"
+          alt="{{ recommendedProduct().title }}"
+          class="featured-product-image"
+        />
+        <h2>{{ recommendedProduct().title }}</h2>
+        <p class="featured-product-category">
+          {{ recommendedProduct().category }}
+        </p>
+        <p class="featured-product-price">${{ recommendedProduct().price }}</p>
+      </div>
 
       <!-- Categories Section -->
       <div class="categories">
@@ -55,7 +65,7 @@
         <div class="category-grid">
           <div class="category-card" *ngFor="let category of categories">
             <img src="path/to/category-image" alt="category" />
-            <h4>category</h4>
+            <h4>{{ category }}</h4>
           </div>
         </div>
       </div>
