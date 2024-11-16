@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Component, computed, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CategoriesService } from '../../services/api/categories.service';
 import { ProductsService } from '../../services/api/products.service';
 import { AuthService } from '../../services/auth/auth.service';
 
@@ -36,9 +37,9 @@ export class HomeComponent {
   imageLoaded = signal<boolean>(false);
 
   quotes: string[] = [
-    'Discover premium products that elevate your lifestyle',
-    'Elevate your space with innovative design and unmatched quality.',
-    'Find the perfect balance of comfort and style with our collection.',
+    'Premium products that elevate your lifestyle',
+    'Elevate your space unmatched quality.',
+    'Find comfort and style with our collection.',
   ];
   currentQuote: string = '';
   currentIndex: number = 0;
@@ -47,21 +48,18 @@ export class HomeComponent {
   deletingSpeed: number = 30;
   delayBetweenQuotes: number = 2000;
 
-  categories: string[] = [
-    'Electronics',
-    'Jewelry',
-    'Men Clothing',
-    'Women Clothing',
-  ];
+  categories = signal<string[]>([]);
 
   constructor(
     private authService: AuthService,
     private router: Router,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private categoriesService: CategoriesService
   ) {}
 
   ngOnInit() {
     this.fetchProducts();
+    this.fetchCategories();
     this.startTypingEffect();
   }
 
@@ -77,6 +75,16 @@ export class HomeComponent {
       },
       error: () => {
         this.loading.set(false);
+      },
+    });
+  }
+  fetchCategories() {
+    this.categoriesService.getCategories().subscribe({
+      next: (data: string[]) => {
+        this.categories.set(data);
+      },
+      error: (error) => {
+        console.error('Error fetching categories:', error);
       },
     });
   }

@@ -196,7 +196,7 @@
 
     .featured-product {
       padding: 1rem;
-      background: rgba(0, 0, 0, 0.7);
+      background:#00031E65;
       border-radius: 8px;
       color: #F0F0F0;
       text-align: center;
@@ -223,11 +223,11 @@
         justify-content: space-between;
         align-items: center;
         height: 300px;
+
         @media (max-width: 768px) {
-          height: 190px;
+          height: 240px;
           flex-direction: column;
           margin-top: .3rem;
-
         }
 
         .featured-product-description {
@@ -249,6 +249,9 @@
 
         .featured-product-image {
           width:44%;
+          @media (max-width: 768px) {
+            width: 50%;
+          }
           img {
             width: 100%;
             aspect-ratio: 1/1;
@@ -270,7 +273,7 @@
         transition: opacity 300ms ease-in-out;
       }
       h2 {
-        margin: 3rem 0 0;
+        margin: 1.6rem 0 0;
         font-size: 1.5rem;
         text-wrap: nowrap;
         text-overflow: ellipsis;
@@ -305,6 +308,7 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
+
 
         .category-card {
           background: rgba(0, 0, 0, 0.3);
@@ -357,27 +361,29 @@
           margin-top: 0; /* Adjust heading size */
         }
         .category-grid {
-          grid-template-columns: 1fr; /* Stack categories vertically */
+          grid-template-columns: 1fr;
         }
       }
     }
 
     .products-container {
-      width: 100%; /* Full width for product grid */
+      width: 100%;
       .search-bar {
         input {
-          padding: 0.5rem 2.5rem 0.5rem 1.5rem; /* Adjust padding */
-          font-size: 0.9rem; /* Adjust font size */
+          padding: 0.5rem 2.5rem 0.5rem 4.6rem;
+          font-size: 0.9rem;
+          background-position: 12px 5px;
+          background-size: 11px 11px;
         }
       }
       .product-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 products per row */
-        gap: 1rem; /* Adjust spacing */
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
       }
       .product-card {
-        aspect-ratio: auto; /* Let height adjust dynamically */
+        aspect-ratio: auto;
         .product-image-row img {
-          width: 60%; /* Reduce image size for better fit */
+          width: 60%; 
         }
       }
     }

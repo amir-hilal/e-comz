@@ -61,8 +61,7 @@
       <div class="categories">
         <h3>Explore Categories</h3>
         <div class="category-grid">
-          <div class="category-card" *ngFor="let category of categories">
-            <img src="path/to/category-image" alt="category" />
+          <div class="category-card" *ngFor="let category of categories()">
             <h4>{{ category }}</h4>
           </div>
         </div>
