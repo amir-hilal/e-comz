@@ -4,8 +4,6 @@
   align-items: center;
   gap: 2rem;
   padding: 0rem;
-
-
 }
 
 .hero {
@@ -195,6 +193,7 @@
     flex-direction: column;
     width: 32%;
 
+
     .featured-product {
       padding: 1rem;
       background: rgba(0, 0, 0, 0.7);
@@ -202,13 +201,18 @@
       color: #F0F0F0;
       text-align: center;
       transition: opacity 300ms ease-in-out;
-
+      height: 315px !important;
+      .flex-space-between{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+      }
       .featured-product-category {
         font-size: 0.7rem;
         font-weight: normal;
         color: #F0F0F0;
         text-align: center;
-
       }
 
       .image-decription-wrap{
@@ -219,6 +223,13 @@
         justify-content: space-between;
         align-items: center;
         height: 300px;
+        @media (max-width: 768px) {
+          height: 190px;
+          flex-direction: column;
+          margin-top: .3rem;
+
+        }
+
         .featured-product-description {
           width: 44%;
           margin-bottom: 1rem;
@@ -228,6 +239,11 @@
           text-align: left;
           line-height: 1.5;
           text-overflow: ellipsis;
+          @media (max-width: 768px) {
+              width: 100%;
+              max-height: 100px;
+              overflow: hidden;
+          }
          }
 
 
@@ -242,11 +258,12 @@
 
           .image-placeholder {
             aspect-ratio: 1/1;
-
             background-color: #a0a0a030;
             border-radius: 8px;
           }
         }
+
+
       }
 
       h2, .featured-product-category, .featured-product-price {
@@ -257,6 +274,9 @@
         font-size: 1.5rem;
         text-wrap: nowrap;
         text-overflow: ellipsis;
+        @media (max-width: 768px) {
+          margin: 1rem 0 0;
+        }
       }
 
 
@@ -266,6 +286,9 @@
         font-weight: bold;
         color: #ffc107;
       }
+
+
+
     }
 
 
@@ -324,7 +347,6 @@
       height: 100%;
       .featured-product {
         width: 44%; /* Half width for featured product */
-        height: 100% !important;
         padding: 2.28rem 1rem;
       }
 

@@ -21,11 +21,17 @@
     <div class="products-details-categories">
       <div class="featured-product">
         <!-- Container for synchronized fade in/out animation -->
-        <div *ngIf="showFeaturedProduct() && recommendedProduct()" @fadeInOut>
-          <h2>{{ recommendedProduct()?.title }}</h2>
-          <p class="featured-product-category">
-            {{ recommendedProduct()?.category }}
-          </p>
+        <div
+          class="flex-space-between"
+          *ngIf="showFeaturedProduct() && recommendedProduct()"
+          @fadeInOut
+        >
+          <div>
+            <h2>{{ recommendedProduct()?.title }}</h2>
+            <p class="featured-product-category">
+              {{ recommendedProduct()?.category }}
+            </p>
+          </div>
 
           <div class="image-decription-wrap">
             <p class="featured-product-description">
