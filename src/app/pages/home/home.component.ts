@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Component, computed, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ProductsComponent } from '../../components/products/products.component';
 import { CategoriesService } from '../../services/api/categories.service';
 import { ProductsService } from '../../services/api/products.service';
 import { AuthService } from '../../services/auth/auth.service';
@@ -10,7 +11,7 @@ import { AuthService } from '../../services/auth/auth.service';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ProductsComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   animations: [
