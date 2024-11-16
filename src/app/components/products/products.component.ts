@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, signal, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ProductsService } from '../../services/api/products.service';
 
@@ -12,16 +12,17 @@ import { ProductsService } from '../../services/api/products.service';
 })
 export class ProductsComponent {
   products = signal<any[]>([]);
-  loading = signal<boolean>(false);
+  loading = signal<boolean>(false); // For fetching products
+  searchLoading = signal<boolean>(false); // For searching products
   searchTerm = signal<string>('');
-  filteredProducts = computed(() =>
-    this.products().filter((product) =>
-      product.title.toLowerCase().includes(this.searchTerm().toLowerCase())
-    )
-  );
+  filteredProducts = computed(() => {
+    const searchValue = this.searchTerm().toLowerCase();
+    return this.products().filter((product) =>
+      product.title.toLowerCase().includes(searchValue)
+    );
+  });
 
-  // Skeleton array for placeholders (3x3 grid)
-  skeletonArray = Array(9).fill(0);
+  skeletonArray = Array(9).fill(0); // Skeleton placeholders (3x3 grid)
 
   constructor(private productsService: ProductsService) {}
 
@@ -40,5 +41,13 @@ export class ProductsComponent {
         this.loading.set(false);
       },
     });
+  }
+
+  onSearchChange() {
+    this.searchLoading.set(true);
+    // Simulate delay to mimic search processing (replace with actual API call if needed)
+    setTimeout(() => {
+      this.searchLoading.set(false);
+    }, 500);
   }
 }
