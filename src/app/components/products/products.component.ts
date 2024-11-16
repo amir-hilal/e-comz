@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, signal, ViewEncapsulation } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ProductsService } from '../../services/api/products.service';
 
@@ -19,6 +19,9 @@ export class ProductsComponent {
       product.title.toLowerCase().includes(this.searchTerm().toLowerCase())
     )
   );
+
+  // Skeleton array for placeholders (3x3 grid)
+  skeletonArray = Array(9).fill(0);
 
   constructor(private productsService: ProductsService) {}
 
