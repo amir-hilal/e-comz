@@ -35,6 +35,18 @@ export class HomeComponent {
   showFeaturedProduct = signal<boolean>(false);
   imageLoaded = signal<boolean>(false);
 
+  quotes: string[] = [
+    'Discover premium products that elevate your lifestyle',
+    'Elevate your space with innovative design and unmatched quality.',
+    'Find the perfect balance of comfort and style with our collection.',
+  ];
+  currentQuote: string = '';
+  currentIndex: number = 0;
+  isDeleting: boolean = false;
+  typingSpeed: number = 60;
+  deletingSpeed: number = 30;
+  delayBetweenQuotes: number = 2000;
+
   categories: string[] = [
     'Electronics',
     'Jewelry',
@@ -50,6 +62,7 @@ export class HomeComponent {
 
   ngOnInit() {
     this.fetchProducts();
+    this.startTypingEffect();
   }
 
   fetchProducts() {
@@ -66,6 +79,30 @@ export class HomeComponent {
         this.loading.set(false);
       },
     });
+  }
+
+  startTypingEffect() {
+    const quote = this.quotes[this.currentIndex];
+    if (!this.isDeleting) {
+      // Typing
+      this.currentQuote = quote.substring(0, this.currentQuote.length + 1);
+      if (this.currentQuote === quote) {
+        this.isDeleting = true;
+        setTimeout(() => this.startTypingEffect(), this.delayBetweenQuotes);
+        return;
+      }
+    } else {
+      // Deleting
+      this.currentQuote = quote.substring(0, this.currentQuote.length - 1);
+      if (this.currentQuote === '') {
+        this.isDeleting = false;
+        this.currentIndex = (this.currentIndex + 1) % this.quotes.length; // Cycle through quotes
+      }
+    }
+    setTimeout(
+      () => this.startTypingEffect(),
+      this.isDeleting ? this.deletingSpeed : this.typingSpeed
+    );
   }
 
   selectRandomRecommendedProduct() {

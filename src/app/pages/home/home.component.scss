@@ -36,13 +36,41 @@
     background-color: #7A551E;
   }
 
-  p{
-    font-style: italic;
+  .typing-effect {
     font-size: 0.1rem !important;
+    font-style: italic;
+    display: inline-block;
+    overflow: hidden;
+    padding-right: 5px;
     align-self: center;
     width: 20%;
+    min-height: 40px;
   }
 
+  .cursor {
+    display: inline-block;
+    width: 3px;
+    height: 10px;
+    background-color: #f0f0f0f0;
+    animation: blink 0.7s step-end infinite;
+  }
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+
+
+  @media (max-width: 768px) {
+    h1{
+      letter-spacing: 7px;
+      font-size: 30px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+  }
 }
 
 .products-section{
