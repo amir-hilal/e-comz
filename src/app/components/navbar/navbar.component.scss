@@ -2,18 +2,17 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 6rem;
+  padding: 0;
   background-color: transparent;
   color: white;
-  @media (max-width: 768px) {
-    padding: 0rem 2rem;
-  }
-  
+
+
   .logo a {
     font-size: 2.2rem;
     font-weight: normal;
     color: white;
     text-decoration: none;
+
   }
 
   .nav-links {
@@ -24,9 +23,31 @@
     font-weight: lighter;
 
     li a {
+      cursor: pointer;
       color: white;
       text-decoration: none;
       font-size: 1rem;
+    }
+  }
+
+  .mobile-actions{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    button{
+      background-color: transparent;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2px 15px;
+    }
+    mat-icon {
+      font-size: 3rem; /* Adjust icon size */
+      color: #f0f0f0; /* Change icon color */
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 
@@ -35,11 +56,18 @@
     align-items: center;
     gap: 1rem;
 
+
     .cart-icon {
       text-decoration: none;
       display: flex;
       align-items: center;
+
+      svg{
+        display: flex;
+        align-items: center;
+      }
     }
+
 
     a {
       color: white;

@@ -1,17 +1,32 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { Component, HostListener } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, MatIconModule, MatMenuModule],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
-  constructor(private authService: AuthService, private router: Router) {}
+  isMobile = false;
+
+  constructor(private authService: AuthService, private router: Router) {
+    this.checkScreenSize();
+  }
+
+  @HostListener('window:resize', [])
+  onResize() {
+    this.checkScreenSize();
+  }
+
+  checkScreenSize() {
+    this.isMobile = window.innerWidth <= 768;
+  }
 
   onLogout() {
     this.authService.logout().subscribe({

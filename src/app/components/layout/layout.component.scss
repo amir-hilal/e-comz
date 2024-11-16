@@ -1,12 +1,11 @@
 :host {
   display: block;
-  min-height: 100vh;
   width: 100%;
   margin: 0;
   color: white;
   background-image: url('../../../assets/bg-home.png');
-  background-size: 100vw 300vh;
-  background-position: center center;
+  background-size: 100vw 200vh;
+  background-position: center top;
   background-repeat: repeat-y;
 }
 
@@ -14,8 +13,20 @@
   padding: 20px 44px;
 }
 
+
 .bg-low-opacity{
-  padding: 10px;
+  padding: 20px 40px;
   background-color: #FFFFFF20;
   border-radius: 12px;
+}
+
+
+
+@media (max-width: 768px) {
+  .container {
+    padding: 10px 10px;
+  }
+  .bg-low-opacity{
+    padding: 15px 15px;
+  }
 }
