@@ -51,24 +51,26 @@
         <div *ngIf="showFeaturedProduct() && recommendedProduct()" @fadeInOut>
           <h2>{{ recommendedProduct()?.title }}</h2>
           <p class="featured-product-category">
-            {{ recommendedProduct()?.description }}
+            {{ recommendedProduct()?.category }}
           </p>
-          <!-- Image with fadeInOut animation and placeholder -->
-          <div class="featured-product-image">
-            <div class="image-placeholder" *ngIf="!imageLoaded()"></div>
-            <img
-              *ngIf="recommendedProduct()"
-              [src]="recommendedProduct()?.image"
-              alt="{{ recommendedProduct()?.title }}"
-              (load)="imageLoaded.set(true)"
-            />
+
+          <div class="image-decription-wrap">
+            <p class="featured-product-description">
+              {{ recommendedProduct()?.description }}
+            </p>
+            <!-- Image with fadeInOut animation and placeholder -->
+            <div class="featured-product-image">
+              <div class="image-placeholder" *ngIf="!imageLoaded()"></div>
+              <img
+                *ngIf="recommendedProduct()"
+                [src]="recommendedProduct()?.image"
+                alt="{{ recommendedProduct()?.title }}"
+                (load)="imageLoaded.set(true)"
+              />
+            </div>
           </div>
 
           <!-- Title, Category, and Price -->
-
-          <p class="featured-product-category">
-            {{ recommendedProduct()?.category }}
-          </p>
 
           <p class="featured-product-price">
             ${{ recommendedProduct()?.price }}

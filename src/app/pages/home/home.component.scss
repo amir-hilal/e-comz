@@ -167,37 +167,55 @@
       padding: 1rem;
       background: rgba(0, 0, 0, 0.7);
       border-radius: 8px;
-      color: white;
+      color: #F0F0F0;
       max-width: 300px;
       text-align: center;
       transition: opacity 300ms ease-in-out;
       height: 500px;
-      .featured-product-image {
-        width: 100%;
+
+      .featured-product-category {
+        font-size: 0.7rem;
+        font-weight: normal;
+        color: #F0F0F0;
+        text-align: center;
+
+      }
+
+      .image-decription-wrap{
         display: flex;
-        justify-content: center;
-        position: relative;
+        flex-direction: row;
+        margin-top: 2rem;
+        overflow: hidden;
+        justify-content: space-between;
+        align-items: center;
+        height: 260px;
+        .featured-product-description {
+          width: 44%;
+          margin-bottom: 1rem;
+          font-size: 0.6rem;
+          font-weight: normal;
+          color: #F0F0F0;
+          text-align: left;
+          line-height: 1.5;
+          text-overflow: ellipsis;
+         }
 
-        img {
-          width: 100%; /* Restrict image size */
-          height: auto;
-          max-width: 150px;
-          aspect-ratio: 1/1;
-          border-radius: 8px;
-          object-fit: cover;
-          transition: opacity 300ms ease-in-out;
 
-        }
+        .featured-product-image {
+          width:44%;
+          img {
+            width: 100%; 
+            aspect-ratio: 1/1;
+            border-radius: 8px;
+            transition: opacity 300ms ease-in-out;
+          }
 
-        .image-placeholder {
-          position: absolute;
-          width: 100px;
-          height: 100%;
-          background-color: #a0a0a030; /* Light gray for placeholder */
-          border-radius: 8px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          .image-placeholder {
+            aspect-ratio: 1/1;
+
+            background-color: #a0a0a030;
+            border-radius: 8px;
+          }
         }
       }
 
@@ -205,15 +223,13 @@
         transition: opacity 300ms ease-in-out;
       }
       h2 {
+        margin: 3rem 0 0;
         font-size: 1.5rem;
-        font-weight: bold;
-        margin: 0.5rem 0;
+        text-wrap: nowrap;
+        text-overflow: ellipsis;
       }
 
-      .featured-product-category {
-        font-size: 0.9rem;
-        color: rgba(255, 255, 255, 0.7);
-      }
+
 
       .featured-product-price {
         font-size: 1.3rem;
@@ -265,3 +281,5 @@
 
   }
 }
+
+
