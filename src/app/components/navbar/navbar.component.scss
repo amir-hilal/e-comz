@@ -5,7 +5,10 @@
   padding: 1rem 6rem;
   background-color: transparent;
   color: white;
-
+  @media (max-width: 768px) {
+    padding: 0rem 2rem;
+  }
+  
   .logo a {
     font-size: 2.2rem;
     font-weight: normal;
