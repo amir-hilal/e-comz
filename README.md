@@ -11,9 +11,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 | Login screen                                | Register screen                            |
 | ------------------------------------------- | ----------------------------------------- |
-| <img src="./readme/assets/Login.png" alt="Login screen" width="385" height="167">  | ![Landing](./readme/assets/Register.png) |
+| ![Landing](./readme/assets/Login.png)  | ![Landing](./readme/assets/Register.png) |
 | Home screen                              | Cart screen                              |
-| <img src="./readme/assets/Home.png" alt="Gardens screen" width="385" height="167">  | ![Landing](./readme/assets/Cart.png) |
+| ![Landing](./readme/assets/Home.png)  | ![Landing](./readme/assets/Cart.png) |
 
 
 
