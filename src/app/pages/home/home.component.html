@@ -61,9 +61,22 @@
       <div class="categories">
         <h3>Explore Categories</h3>
         <div class="category-grid">
-          <div class="category-card" *ngFor="let category of categories()">
-            <h4>{{ category }}</h4>
-          </div>
+          <!-- Skeleton placeholders when categories are loading -->
+          <ng-container *ngIf="loadingCategories">
+            <div
+              class="category-card skeleton-card"
+              *ngFor="let _ of skeletonArray"
+            >
+              <div class="skeleton-title"></div>
+            </div>
+          </ng-container>
+
+          <!-- Actual category cards -->
+          <ng-container *ngIf="!loadingCategories">
+            <div class="category-card" *ngFor="let category of categories()">
+              <h4>{{ category }}</h4>
+            </div>
+          </ng-container>
         </div>
       </div>
     </div>

@@ -36,6 +36,8 @@ export class HomeComponent {
   recommendedProduct = signal<any | null>(null);
   showFeaturedProduct = signal<boolean>(false);
   imageLoaded = signal<boolean>(false);
+  loadingCategories = false;
+  skeletonArray = Array(4).fill(0);
 
   quotes: string[] = [
     'Premium products that elevate your lifestyle',
@@ -80,12 +82,16 @@ export class HomeComponent {
     });
   }
   fetchCategories() {
+    this.loadingCategories = true;
+
     this.categoriesService.getCategories().subscribe({
       next: (data: string[]) => {
         this.categories.set(data);
+        this.loadingCategories = false;
       },
       error: (error) => {
         console.error('Error fetching categories:', error);
+        this.loadingCategories = false;
       },
     });
   }
