@@ -8,7 +8,7 @@
   .footer-container {
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
     gap: 2rem;
 
     @media (max-width: 868px) {
@@ -26,6 +26,7 @@
       font-weight: bold;
       margin-bottom: 0.5rem;
       margin-top: 0;
+      color: #292F42;
     }
 
     ul {

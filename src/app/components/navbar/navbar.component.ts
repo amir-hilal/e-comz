@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, computed } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { Router } from '@angular/router';
@@ -14,6 +14,7 @@ import { AuthService } from '../../services/auth/auth.service';
 })
 export class NavbarComponent {
   isMobile = false;
+  isAuthenticated = computed(() => this.authService.isAuthenticated());
 
   constructor(private authService: AuthService, private router: Router) {
     this.checkScreenSize();
@@ -35,5 +36,13 @@ export class NavbarComponent {
       },
       error: (error) => console.error('Logout error:', error),
     });
+  }
+
+  onLogin() {
+    this.router.navigate(['/auth/login']);
+  }
+
+  onRegister() {
+    this.router.navigate(['/auth/register']);
   }
 }

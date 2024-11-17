@@ -49,13 +49,14 @@
       align-items: center;
       justify-content: center;
     }
+
+
   }
 
   .auth-links {
     display: flex;
     align-items: center;
     gap: 1rem;
-
 
     .cart-icon {
       text-decoration: none;
@@ -69,10 +70,21 @@
     }
 
 
+    .cart-icon.disabled {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
     a {
       color: white;
       text-decoration: none;
       font-size: 1.1rem;
     }
   }
+}
+
+
+.auth-link{
+  cursor: pointer;
+  margin: 0 1rem;
 }

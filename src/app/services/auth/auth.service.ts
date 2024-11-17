@@ -62,8 +62,6 @@ export class AuthService {
               });
             }
           });
-
-          this.router.navigate(['/home']);
         } else {
           console.error('No user credential returned from Google sign-in');
         }
@@ -113,7 +111,6 @@ export class AuthService {
             });
           }
         });
-        this.router.navigate(['/home']);
       })
     );
   }
