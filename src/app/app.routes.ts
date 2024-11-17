@@ -6,6 +6,7 @@ import { LoginComponent } from './pages/auth/login/login.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { HomeComponent } from './pages/home/home.component';
+import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 import { SupportComponent } from './pages/support/support.component';
 import { AuthGuard } from './services/guards/auth.guard';
 
@@ -52,6 +53,12 @@ export const routes: Routes = [
         path: 'support',
         component: SupportComponent,
         data: { animation: 'SupportPage' },
+      },
+
+      {
+        path: 'product/:id',
+        component: ProductDetailsComponent,
+        data: { animation: 'ProductDetailsPage' },
       },
 
       // { path: 'cart', component: CartComponent },

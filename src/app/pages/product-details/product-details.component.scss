@@ -1,0 +1,107 @@
+.product-details-container {
+  padding: 2rem;
+  color: white;
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 1rem;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  .product-details {
+    display: flex;
+    gap: 2rem;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 12px;
+    padding: 2rem;
+  }
+
+  .product-image img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 12px;
+  }
+
+  .product-info {
+    display: flex;
+    flex-direction: column;
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .category {
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 1rem;
+    }
+
+    .rating {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+
+      .star {
+        color: gold;
+        font-size: 1.5rem;
+        margin-right: 0.2rem;
+      }
+
+      .reviews {
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.6);
+        margin-left: 0.5rem;
+      }
+    }
+
+    .description {
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+    }
+
+    .quality-options {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+
+      .quality-button {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        color: white;
+        background-color: rgba(255, 255, 255, 0.2);
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.4);
+        }
+      }
+    }
+
+    .price {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+    }
+
+    .add-to-cart-button {
+      padding: 0.8rem 1.5rem;
+      font-size: 1.2rem;
+      color: white;
+      background-color: #007bff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+  }
+}
