@@ -38,3 +38,24 @@ $e-comz-theme: mat.define-theme((
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.snackbar-success .mdc-snackbar__surface {
+  background-color: #4caf50 !important; /* Green background for success */
+  color: white !important;
+  font-weight: bold;
+}
+
+.snackbar-error .mdc-snackbar__surface {
+  background-color: #f44336 !important; /* Red background for error */
+  color: white !important;
+  font-weight: bold;
+}
+
+.snackbar-error .mdc-button__label,  .snackbar-success .mdc-button__label {
+  color: white !important;
+  font-weight: lighter;
+  text-align: center;
+}
+
+
