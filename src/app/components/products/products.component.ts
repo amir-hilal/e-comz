@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, signal, ViewEncapsulation } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ProductsService } from '../../services/api/products.service';
 
 @Component({
@@ -12,8 +13,8 @@ import { ProductsService } from '../../services/api/products.service';
 })
 export class ProductsComponent {
   products = signal<any[]>([]);
-  loading = signal<boolean>(false); // For fetching products
-  searchLoading = signal<boolean>(false); // For searching products
+  loading = signal<boolean>(false);
+  searchLoading = signal<boolean>(false);
   searchTerm = signal<string>('');
   filteredProducts = computed(() => {
     const searchValue = this.searchTerm().toLowerCase();
@@ -24,7 +25,10 @@ export class ProductsComponent {
 
   skeletonArray = Array(9).fill(0); // Skeleton placeholders (3x3 grid)
 
-  constructor(private productsService: ProductsService) {}
+  constructor(
+    private productsService: ProductsService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.fetchProducts();
@@ -45,9 +49,12 @@ export class ProductsComponent {
 
   onSearchChange() {
     this.searchLoading.set(true);
-    // Simulate delay to mimic search processing (replace with actual API call if needed)
     setTimeout(() => {
       this.searchLoading.set(false);
     }, 500);
+  }
+
+  navigateToProduct(productId: string) {
+    this.router.navigate([`/product/${productId}`]);
   }
 }

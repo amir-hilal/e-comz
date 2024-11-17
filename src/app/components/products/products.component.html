@@ -17,7 +17,11 @@
 
   <!-- Actual product cards -->
   <div class="product-grid" *ngIf="!loading() && !searchLoading()">
-    <div *ngFor="let product of filteredProducts()" class="product-card">
+    <div
+      *ngFor="let product of filteredProducts()"
+      class="product-card"
+      (click)="navigateToProduct(product.id)"
+    >
       <div class="bg-circle"></div>
       <div class="product-info-row">
         <h3 class="product-title">{{ product.title }}</h3>
