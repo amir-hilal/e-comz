@@ -7,12 +7,13 @@
 
   .about-card,
   .team-card {
-    background: rgba(0, 0, 0, 0.8);
+    background: #00031E65;
     color: white;
     border-radius: 12px;
 
     mat-card-title {
       font-size: 1.8rem;
+      margin-bottom: 1rem;
       font-weight: bold;
     }
 
@@ -29,7 +30,7 @@
 
     .team-member {
       text-align: center;
-
+      margin-top: 2rem;
       .team-photo {
         width: 100px;
         height: 100px;

@@ -7,13 +7,18 @@
 
   .support-card,
   .faq-card {
-    background: rgba(0, 0, 0, 0.8);
+    background: #00031E65;
     color: white;
     border-radius: 12px;
 
+    .mat-expansion-panel-header-title{
+      color: #f0f0f0;
+    }
     mat-card-title {
       font-size: 1.8rem;
       font-weight: bold;
+    color: white;
+      margin-bottom: 1rem;
     }
 
     mat-card-content {
@@ -23,10 +28,11 @@
   }
 
   mat-expansion-panel {
-    background: rgba(0, 0, 0, 0.6);
+    background: #1E1E1E;
+
     color: white;
     border-radius: 8px;
-    margin-bottom: 1rem;
+    margin: 1rem 0;
 
     mat-expansion-panel-header {
       font-size: 1.1rem;
