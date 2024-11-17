@@ -6,10 +6,8 @@
 
   <!-- Nav Links Section -->
   <ul class="nav-links" *ngIf="!isMobile">
-    <li><a routerLink="/new-arrivals">New Arrivals</a></li>
-    <li><a routerLink="/products">Products</a></li>
-    <li><a routerLink="/about">About Us</a></li>
-    <li><a routerLink="/support">Support</a></li>
+    <li><a [routerLink]="['/about']">About Us</a></li>
+    <li><a [routerLink]="['/support']">Support</a></li>
     <li *ngIf="isAuthenticated()">
       <a (click)="onLogout()">Sign Out</a>
     </li>
@@ -18,7 +16,7 @@
   <!-- Last Section (Cart/Login/Register) -->
   <div class="last-section" *ngIf="!isMobile">
     <ng-container *ngIf="isAuthenticated(); else authButtons">
-      <a routerLink="/cart" class="cart-icon">
+      <a [routerLink]="['/cart']" class="cart-icon">
         <svg
           width="25"
           height="24"
@@ -48,7 +46,7 @@
   <div class="mobile-actions" *ngIf="isMobile">
     <ng-container *ngIf="isAuthenticated(); else authMobileButtons">
       <a
-        routerLink="/cart"
+        [routerLink]="['/cart']"
         class="cart-icon"
         [class.disabled]="!isAuthenticated()"
         [attr.disabled]="!isAuthenticated() ? true : null"
@@ -80,10 +78,8 @@
   </div>
 
   <mat-menu #menu="matMenu">
-    <button mat-menu-item routerLink="/new-arrivals">New Arrivals</button>
-    <button mat-menu-item routerLink="/products">Products</button>
-    <button mat-menu-item routerLink="/about">About Us</button>
-    <button mat-menu-item routerLink="/support">Support</button>
+    <button mat-menu-item [routerLink]="['/about']">About Us</button>
+    <button mat-menu-item [routerLink]="['/support']">Support</button>
     <button mat-menu-item *ngIf="isAuthenticated()" (click)="onLogout()">
       Sign Out
     </button>

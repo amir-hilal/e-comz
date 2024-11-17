@@ -11,10 +11,19 @@
 
 .container{
   padding: 20px 44px;
+  overflow: hidden;
 }
 
 
+.content-wrapper {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
 .bg-low-opacity{
+  position: relative;
   padding: 20px 40px;
   background-color: #FFFFFF20;
   border-radius: 12px;

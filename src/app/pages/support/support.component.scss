@@ -1,0 +1,36 @@
+.support-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+  color: white;
+
+  .support-card,
+  .faq-card {
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    border-radius: 12px;
+
+    mat-card-title {
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+
+    mat-card-content {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+  }
+
+  mat-expansion-panel {
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+
+    mat-expansion-panel-header {
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+  }
+}

@@ -1,0 +1,35 @@
+<div class="about-container">
+  <mat-card class="about-card">
+    <mat-card-header>
+      <mat-card-title>About Us</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        At <strong>E-Comz</strong>, we are passionate about providing premium products that
+        enhance your lifestyle. Our mission is to bring you quality, style, and
+        affordability all in one place. From electronics to fashion, our curated
+        collections are designed to inspire and empower.
+      </p>
+      <p>
+        Founded with the belief that shopping should be an experience, we are
+        committed to exceptional customer service and seamless delivery. Thank
+        you for choosing <strong>E-Comz</strong> for your needs.
+      </p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="team-card">
+    <mat-card-header>
+      <mat-card-title>Meet the Team</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="team-grid">
+        <div class="team-member" *ngFor="let member of team">
+          <img [src]="member.image" [alt]="member.name" class="team-photo" />
+          <h3>{{ member.name }}</h3>
+          <p>{{ member.role }}</p>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
