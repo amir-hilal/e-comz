@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { CartComponent } from './cart/cart.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { AboutComponent } from './pages/about/about.component';
 import { AuthWrapperComponent } from './pages/auth/auth-wrapper.component';
@@ -60,6 +61,12 @@ export const routes: Routes = [
         component: ProductDetailsComponent,
         data: { animation: 'ProductDetailsPage' },
       },
+
+      {
+        path: 'cart',
+        component: CartComponent,
+        data: { animation: 'ProductDetailsPage' },
+      }, 
 
       // { path: 'cart', component: CartComponent },
       // { path: 'product/:id', component: ProductDetailsComponent },
