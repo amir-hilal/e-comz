@@ -1,7 +1,7 @@
 .product-details-container {
   display: grid;
-  grid-template-columns: 2fr 4fr;
-  gap: 3rem;
+  grid-template-columns: 2fr 5fr;
+  gap: 6rem;
   padding: 1rem 0;
   color: white;
   margin-top: 2rem;
@@ -12,8 +12,8 @@
     gap: 1rem;
 
     .back-link {
-      font-size: 1.2rem;
-      font-weight: normal;
+      font-size: 1rem;
+      font-weight: lighter;
       color: white;
       text-decoration: none;
       cursor: pointer;
@@ -54,7 +54,7 @@
     }
 
     .category {
-      font-size: 1.2rem;
+      font-size: 1rem;
       color: rgba(255, 255, 255, 0.7);
       margin:0;
     }
@@ -65,15 +65,18 @@
       margin-bottom: 1rem;
 
       .star {
-        color: gold;
+        align-self: center;
+        color: #00031E;
         font-size: 1.5rem;
         margin-right: 0.2rem;
+        margin-bottom: .2rem;
       }
 
       .reviews {
-        font-size: 1rem;
-        color: rgba(255, 255, 255, 0.7);
+        font-size: .7rem;
+        color: #00031E;
         margin-left: 0.5rem;
+        font-weight: normal;
       }
     }
 
@@ -86,58 +89,73 @@
 
     .quality-options {
       display: flex;
+      flex-direction: column;
       gap: 1rem;
 
       h4 {
-        font-size: 1.2rem;
+        font-size: 1rem;
+        font-weight: normal;
         margin-bottom: 0.5rem;
       }
 
-      .quality-button {
-        padding: 0.5rem 1rem;
-        font-size: 1rem;
-        color: white;
-        background-color: rgba(255, 255, 255, 0.2);
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
+      .quality-buttons-wrap{
+        display: flex;
+        gap: 2rem;
+        .quality-button {
+          padding: 0.5rem 4.3rem;
+          font-size: .8rem;
+          color: white;
+          background-color: rgba(255, 255, 255, 0.2);
+          border: solid 1px white;
+          border-radius: 4px;
+          cursor: pointer;
 
-        &:hover {
-          background-color: rgba(255, 255, 255, 0.4);
+          &:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+          }
         }
       }
+
     }
 
     .price {
       font-size: 1.2rem;
-      font-weight: bold;
+      font-weight: normal;
       margin-bottom: 1rem;
     }
 
     .add-to-cart-button {
-      padding: 0.8rem 1.5rem;
-      font-size: 1.2rem;
+      padding: 0.6rem 1rem;
+      font-size: .8rem;
       color: white;
-      background-color: #007bff;
+      background-color: #00031E;
       border: none;
       border-radius: 8px;
       cursor: pointer;
 
       &:hover {
-        background-color: #0056b3;
+        background-color: #00031E80;
       }
     }
   }
 
   /* Responsive Design */
   @media (max-width: 768px) {
-    grid-template-columns: 1fr; 
     .left-section {
       align-items: center;
+
+      .back-link{
+        font-size: 1.2rem;
+      }
     }
 
     .product-image-wrapper img {
       width: 100%;
     }
+  }
+
+  @media (max-width: 568px) {
+    grid-template-columns: 1fr;
+
   }
 }

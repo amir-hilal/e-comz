@@ -9,13 +9,9 @@ import {
 
 export const routeAnimations = trigger('routeAnimations', [
   transition('* <=> *', [
-    query(
-      ':enter, :leave',
-      style({ position: 'absolute', width: '90.9%' }),
-      {
-        optional: true,
-      }
-    ),
+    query(':enter, :leave', style({ position: 'absolute', width: '93.7%' }), {
+      optional: true,
+    }),
     group([
       query(
         ':leave',
