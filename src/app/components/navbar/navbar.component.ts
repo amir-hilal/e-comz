@@ -50,4 +50,8 @@ export class NavbarComponent {
   onRegister() {
     this.router.navigate(['/auth/register']);
   }
+
+  navigateToCart(): void {
+    this.router.navigate(['/cart']);
+  }
 }

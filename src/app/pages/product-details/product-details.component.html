@@ -51,6 +51,11 @@
     <h2 class="price">{{ product?.price | currency }}</h2>
 
     <!-- Add to Cart Button -->
-    <button class="add-to-cart-button" (click)="addToCart()">Add to cart</button>
+    <button class="add-to-cart-button" (click)="addToCart()">
+      Add to cart
+      <span *ngIf="getProductQuantity(product?.id) > 0">
+        ({{ getProductQuantity(product?.id) }})
+      </span>
+    </button>
   </div>
 </div>

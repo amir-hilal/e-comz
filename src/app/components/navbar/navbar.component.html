@@ -14,9 +14,12 @@
   </ul>
 
   <!-- Last Section (Cart/Login/Register) -->
-  <div class="last-section" *ngIf="!isMobile">
+  <div class="actions" *ngIf="!isMobile">
     <ng-container *ngIf="isAuthenticated(); else authButtons">
-      <a [routerLink]="['/cart']" class="cart-icon">
+      <div class="cart-icon" (click)="navigateToCart()">
+        <span class="cart-count" *ngIf="cartService.totalItems() > 0">
+          {{ cartService.totalItems() }}
+        </span>
         <svg
           width="25"
           height="24"
@@ -32,8 +35,7 @@
             stroke-linejoin="round"
           />
         </svg>
-        <span class="cart-count">{{ cartService.totalItems() }}</span>
-      </a>
+      </div>
     </ng-container>
 
     <ng-template #authButtons>
@@ -44,14 +46,12 @@
 
   <!-- Mobile Actions -->
 
-  <div class="mobile-actions" *ngIf="isMobile">
+  <div class="actions" *ngIf="isMobile">
     <ng-container *ngIf="isAuthenticated(); else authMobileButtons">
-      <a
-        [routerLink]="['/cart']"
-        class="cart-icon"
-        [class.disabled]="!isAuthenticated()"
-        [attr.disabled]="!isAuthenticated() ? true : null"
-      >
+      <div class="cart-icon" (click)="navigateToCart()">
+        <span class="cart-count" *ngIf="cartService.totalItems() > 0">
+          {{ cartService.totalItems() }}
+        </span>
         <svg
           width="25"
           height="24"
@@ -67,8 +67,7 @@
             stroke-linejoin="round"
           />
         </svg>
-        <span class="cart-count">{{ cartService.totalItems() }}</span>
-      </a>
+      </div>
     </ng-container>
     <ng-template #authMobileButtons>
       <a (click)="onLogin()" class="auth-link">Login</a>

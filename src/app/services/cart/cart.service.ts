@@ -35,6 +35,11 @@ export class CartService {
     });
   }
 
+  getProductQuantity(productId: string): number {
+    const product = this.cartItems().find((item) => item.id === productId);
+    return product ? product.quantity : 0;
+  }
+
   clearCart() {
     this.cartItems.set([]);
     this.saveCartToLocalStorage([]);

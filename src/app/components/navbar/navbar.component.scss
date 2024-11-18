@@ -6,13 +6,11 @@
   background-color: transparent;
   color: white;
 
-
   .logo a {
     font-size: 2.2rem;
     font-weight: normal;
     color: white;
     text-decoration: none;
-
   }
 
   .nav-links {
@@ -30,18 +28,37 @@
     }
   }
 
-  .mobile-actions{
+  .actions {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    button{
+    gap: 1rem;
+
+    .cart-icon{
+      display: flex;
+      gap:1rem;
+      background-color: #f0f0f030;
+      padding: .5rem;
+      border-radius: 8px;
+    }
+    .cart-count {
+      right: -10px;
+      color: #ffffff; /* White text */
+      font-size: 0.8rem;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    button {
       background-color: transparent;
       border: none;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 2px 15px;
     }
+
     mat-icon {
       font-size: 3rem; /* Adjust icon size */
       color: #f0f0f0; /* Change icon color */
@@ -49,8 +66,6 @@
       align-items: center;
       justify-content: center;
     }
-
-
   }
 
   .auth-links {
@@ -58,16 +73,7 @@
     align-items: center;
     gap: 1rem;
 
-    .cart-icon {
-      text-decoration: none;
-      display: flex;
-      align-items: center;
 
-      svg{
-        display: flex;
-        align-items: center;
-      }
-    }
 
 
     .cart-icon.disabled {
@@ -81,10 +87,9 @@
       font-size: 1.1rem;
     }
   }
-}
 
-
-.auth-link{
-  cursor: pointer;
-  margin: 0 1rem;
+  .auth-link {
+    cursor: pointer;
+    margin: 0 1rem;
+  }
 }

@@ -56,4 +56,8 @@ export class ProductDetailsComponent implements OnInit {
       this.cartService.addToCart(this.product);
     }
   }
+
+  getProductQuantity(productId: string): number {
+    return this.cartService.getProductQuantity(productId);
+  }
 }
