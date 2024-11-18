@@ -1,42 +1,39 @@
 <div class="product-details-container">
-  <a routerLink="/" class="back-link">← Back to home page</a>
-
-  <div class="product-details">
-    <!-- Product Image -->
-    <div class="product-image">
+  <!-- Left Section -->
+  <div class="left-section">
+    <a class="back-link" [routerLink]="['/home']">← Back to home page</a>
+    <div class="product-image-wrapper">
       <img [src]="product?.image" [alt]="product?.title" />
     </div>
+  </div>
 
-    <!-- Product Info -->
-    <div class="product-info">
-      <h1>{{ product?.title }}</h1>
-      <p class="category">{{ product?.category }}</p>
+  <!-- Right Section -->
+  <div class="right-section">
+    <h1>{{ product?.title }}</h1>
+    <p class="category">{{ product?.category }}</p>
 
-      <!-- Rating -->
-      <div class="rating">
-        <span *ngFor="let star of [1, 2, 3, 4, 5]" class="star">
-          ★
-        </span>
-        <span class="reviews">({{ product?.rating?.count || 0 }} reviews)</span>
-      </div>
-
-      <!-- Description -->
-      <p class="description">
-        {{ product?.description }}
-      </p>
-
-      <!-- Quality Options -->
-      <div class="quality-options">
-        <h4>Select quality</h4>
-        <button class="quality-button">Basic</button>
-        <button class="quality-button">Premium</button>
-      </div>
-
-      <!-- Price -->
-      <h2 class="price">{{ product?.price }}</h2>
-
-      <!-- Add to Cart Button -->
-      <button class="add-to-cart-button">Add to cart</button>
+    <!-- Rating -->
+    <div class="rating">
+      <span *ngFor="let star of [1, 2, 3, 4, 5]" class="star"> ★ </span>
+      <span class="reviews">({{ product?.rating?.count || 0 }} reviews)</span>
     </div>
+
+    <!-- Description -->
+    <p class="description">
+      {{ product?.description }}
+    </p>
+
+    <!-- Quality Options -->
+    <div class="quality-options">
+      <h4>Select quality</h4>
+      <button class="quality-button">Basic</button>
+      <button class="quality-button">Premium</button>
+    </div>
+
+    <!-- Price -->
+    <h2 class="price">{{ product?.price | currency }}</h2>
+
+    <!-- Add to Cart Button -->
+    <button class="add-to-cart-button">Add to cart</button>
   </div>
 </div>
