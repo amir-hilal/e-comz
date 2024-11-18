@@ -36,8 +36,30 @@ $e-comz-theme: mat.define-theme((
 // @include mat.color-variants-backwards-compatibility($e-comz-theme);
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html{
+  height: 100%;
+  font-size: 16px; /* Default base font size */
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 9px; /* Scaled-down base font size for smaller screens */
+  }
+}
+body { height: 100%; }
+
+body { margin: 0;   font-family: "Inter", serif;
+  font-optical-sizing: auto; }
+
+*::before,
+*::after {
+  box-sizing: border-box; /* Ensures padding and borders are included in element width */
+}
+
+div {
+  max-width: 100%; /* Prevents <div> elements from exceeding parent's width */
+  overflow: hidden; /* Hides any content that might overflow */
+}
 
 
 .snackbar-success .mdc-snackbar__surface {

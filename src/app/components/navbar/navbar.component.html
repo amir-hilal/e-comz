@@ -1,0 +1,91 @@
+<nav class="navbar">
+  <!-- Logo Section -->
+  <div class="logo">
+    <a routerLink="/">E-Comz</a>
+  </div>
+
+  <!-- Nav Links Section -->
+  <ul class="nav-links" *ngIf="!isMobile">
+    <li><a routerLink="/new-arrivals">New Arrivals</a></li>
+    <li><a routerLink="/products">Products</a></li>
+    <li><a routerLink="/about">About Us</a></li>
+    <li><a routerLink="/support">Support</a></li>
+    <li *ngIf="isAuthenticated()">
+      <a (click)="onLogout()">Sign Out</a>
+    </li>
+  </ul>
+
+  <!-- Last Section (Cart/Login/Register) -->
+  <div class="last-section" *ngIf="!isMobile">
+    <ng-container *ngIf="isAuthenticated(); else authButtons">
+      <a routerLink="/cart" class="cart-icon">
+        <svg
+          width="25"
+          height="24"
+          viewBox="0 0 34 33"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M1.408 1.51221H7.04001L10.8134 20.3653C10.9422 21.0136 11.2949 21.5959 11.8097 22.0103C12.3245 22.4247 12.9687 22.6449 13.6294 22.6322H27.3152C27.976 22.6449 28.6202 22.4247 29.135 22.0103C29.6498 21.5959 30.0025 21.0136 30.1312 20.3653L32.384 8.55221H8.44801M14.08 29.6722C14.08 30.4498 13.4496 31.0802 12.672 31.0802C11.8944 31.0802 11.264 30.4498 11.264 29.6722C11.264 28.8946 11.8944 28.2642 12.672 28.2642C13.4496 28.2642 14.08 28.8946 14.08 29.6722ZM29.568 29.6722C29.568 30.4498 28.9376 31.0802 28.16 31.0802C27.3824 31.0802 26.752 30.4498 26.752 29.6722C26.752 28.8946 27.3824 28.2642 28.16 28.2642C28.9376 28.2642 29.568 28.8946 29.568 29.6722Z"
+            stroke="#F0F0F0"
+            stroke-width="2.816"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </a>
+    </ng-container>
+
+    <ng-template #authButtons>
+      <a (click)="onLogin()" class="auth-link">Login</a>
+      <a (click)="onRegister()" class="auth-link">Register</a>
+    </ng-template>
+  </div>
+
+  <!-- Mobile Actions -->
+
+  <div class="mobile-actions" *ngIf="isMobile">
+    <ng-container *ngIf="isAuthenticated(); else authMobileButtons">
+      <a
+        routerLink="/cart"
+        class="cart-icon"
+        [class.disabled]="!isAuthenticated()"
+        [attr.disabled]="!isAuthenticated() ? true : null"
+      >
+        <svg
+          width="25"
+          height="24"
+          viewBox="0 0 34 33"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M1.408 1.51221H7.04001L10.8134 20.3653C10.9422 21.0136 11.2949 21.5959 11.8097 22.0103C12.3245 22.4247 12.9687 22.6449 13.6294 22.6322H27.3152C27.976 22.6449 28.6202 22.4247 29.135 22.0103C29.6498 21.5959 30.0025 21.0136 30.1312 20.3653L32.384 8.55221H8.44801M14.08 29.6722C14.08 30.4498 13.4496 31.0802 12.672 31.0802C11.8944 31.0802 11.264 30.4498 11.264 29.6722C11.264 28.8946 11.8944 28.2642 12.672 28.2642C13.4496 28.2642 14.08 28.8946 14.08 29.6722ZM29.568 29.6722C29.568 30.4498 28.9376 31.0802 28.16 31.0802C27.3824 31.0802 26.752 30.4498 26.752 29.6722C26.752 28.8946 27.3824 28.2642 28.16 28.2642C28.9376 28.2642 29.568 28.8946 29.568 29.6722Z"
+            stroke="#F0F0F0"
+            stroke-width="2.816"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </a>
+    </ng-container>
+    <ng-template #authMobileButtons>
+      <a (click)="onLogin()" class="auth-link">Login</a>
+      <a (click)="onRegister()" class="auth-link">Register</a>
+    </ng-template>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="/new-arrivals">New Arrivals</button>
+    <button mat-menu-item routerLink="/products">Products</button>
+    <button mat-menu-item routerLink="/about">About Us</button>
+    <button mat-menu-item routerLink="/support">Support</button>
+    <button mat-menu-item *ngIf="isAuthenticated()" (click)="onLogout()">
+      Sign Out
+    </button>
+  </mat-menu>
+</nav>

@@ -6,6 +6,17 @@ EComz is an e-commerce platform built as part of an assessment project with the 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.11. EComz utilizes the latest Angular practices, aiming to provide a seamless shopping experience for users.
 
+
+### User Screens (Web)
+
+| Login screen                                | Register screen                            |
+| ------------------------------------------- | ----------------------------------------- |
+| ![Landing](./readme/assets/Login.png)  | ![Landing](./readme/assets/Register.png) |
+| Home screen                              | Cart screen                              |
+| ![Landing](./readme/assets/Home.png)  | ![Landing](./readme/assets/Cart.png) |
+
+
+
 ### Project Guide
 
 The project is guided by **ITXI** with mentorship and oversight from **Hussein Ghandour** (h.ghandour@itxi.net).
@@ -112,6 +123,54 @@ The authentication functionality is thoroughly tested using unit tests, with tes
   - `should login with email and password and set auth state`: Tests email login functionality and auth state management.
   - `should register a new user and set Firestore data`: Verifies user registration and Firestore data storage.
   - `should logout and clear auth state`: Ensures that logout clears the auth state and removes tokens.
+
+### ProductsComponent Unit Tests
+
+- **Initialization**:
+  - `should create`: Verifies that the `ProductsComponent` is created.
+- **Data Fetching**:
+  - `should fetch products on initialization`: Ensures that products are fetched and loaded into the component.
+  - `should set loading to false after fetching products`: Verifies that the loading state is updated correctly after products are fetched.
+- **Filtering**:
+  - `should filter products based on search term`: Tests that the products are filtered correctly based on the search term.
+- **Display Logic**:
+  - `should show loading skeletons when loading is true`: Checks that skeletons are displayed when loading is active.
+  - `should hide loading skeletons when loading is false`: Verifies that skeletons are hidden when loading is inactive.
+  - `should display product cards when not loading`: Ensures that product cards are displayed when loading is inactive.
+- **Search Interaction**:
+  - `should call onSearchChange when the search term changes`: Verifies that the search method is triggered when the search term changes.
+  - `should set searchLoading to true and then false after a delay in onSearchChange`: Tests the behavior of the search loading state.
+
+### NavbarComponent Unit Tests
+
+- **Initialization**:
+  - `should create`: Verifies that the `NavbarComponent` is created.
+- **Screen Size Detection**:
+  - `should set isMobile to true if screen width is <= 768`: Tests the behavior of the `isMobile` property for small screens.
+  - `should set isMobile to false if screen width is > 768`: Tests the behavior of the `isMobile` property for larger screens.
+- **Actions**:
+  - `should call AuthService.logout and navigate to login on logout`: Ensures that logout functionality works as expected.
+- **Template Rendering**:
+  - `should render mobile menu if isMobile is true`: Verifies that the mobile menu is displayed on small screens.
+  - `should render regular navigation links if isMobile is false`: Confirms that regular navigation links are shown on larger screens.
+
+### HomeComponent Unit Tests
+
+- **Initialization**:
+  - `should create`: Verifies that the `HomeComponent` is created.
+- **Data Fetching**:
+  - `should fetch products on initialization`: Ensures that products are fetched and loaded into the component.
+  - `should fetch categories on initialization`: Verifies that categories are fetched and loaded into the component.
+- **Loading States**:
+  - `should set loading to false after fetching products`: Checks the loading state after products are fetched.
+- **Filtering**:
+  - `should filter products based on search term`: Tests that products are filtered correctly based on the search term.
+- **Typing Effect**:
+  - `should display typing effect correctly`: Ensures that the typing effect updates the quote dynamically.
+- **Featured Product Rotation**:
+  - `should handle featured product rotation`: Verifies the behavior of the featured product rotation.
+- **Actions**:
+  - `should call logout and navigate to login page`: Ensures that the logout functionality works correctly.
 
 ---
 

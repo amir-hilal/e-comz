@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { LayoutComponent } from './components/layout/layout.component';
 import { AuthWrapperComponent } from './pages/auth/auth-wrapper.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
@@ -29,9 +30,15 @@ export const routes: Routes = [
     component: DashboardComponent,
     canActivate: [AuthGuard],
   },
-  {
-    path: 'home',
-    component: HomeComponent,
-  },
+
   { path: '', redirectTo: '/home', pathMatch: 'full' },
+  {
+    path: '',
+    component: LayoutComponent,
+    children: [
+      { path: 'home', component: HomeComponent },
+      // { path: 'cart', component: CartComponent },
+      // { path: 'product/:id', component: ProductDetailsComponent },
+    ],
+  },
 ];

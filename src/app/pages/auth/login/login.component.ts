@@ -71,6 +71,7 @@ export class LoginComponent {
     try {
       await this.authService.googleSignIn();
       console.log('Google sign-in successful');
+      this.router.navigate(['/home']);
     } catch (error) {
       console.error('Google sign-in error:', error);
     }

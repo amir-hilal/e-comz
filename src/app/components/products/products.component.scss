@@ -1,0 +1,138 @@
+.products-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .search-bar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 0 0 1rem;
+
+    input {
+      width: 100%;
+      padding: 0.5rem 0.5rem 0.5rem 3.5rem;
+      font-size: 1rem;
+      outline: none;
+      border: 1px solid #f0f0f0;
+      border-radius: 12px;
+      background-color: #f0f0f020;
+      transition: 0.5s;
+      background-image: url('../../../assets/search-icon.png');
+      background-position: 13px 9px;
+      background-size: 16px 16px;
+      background-repeat: no-repeat;
+      color: #f0f0f0;
+    }
+    input::placeholder {
+      font-weight: lighter;
+      opacity: 0.5;
+      font-size: smaller;
+      color: #f0f0f0;
+    }
+    input[type='text']:focus {
+      border: 1px solid #ffe59e;
+      color: #f0f0f0;
+    }
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    flex-grow: 1;
+    margin-top: 1rem;
+
+    .product-card {
+      aspect-ratio: 1/1;
+      background: transparent;
+      position: relative;
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s;
+
+      .product-info-row {
+        z-index: 1;
+        align-self: flex-start;
+
+        .product-title {
+          margin: 0;
+          font-size: 0.7rem;
+          text-wrap: nowrap;
+          text-overflow: ellipsis;
+        }
+
+        .product-category {
+          font-size: 0.5rem;
+          font-weight: normal;
+          margin: 4px 0;
+          color: #c3c3c3;
+        }
+      }
+
+      .product-image-row {
+        width: 100%;
+        padding: 0;
+        z-index: 1;
+        display: flex;
+        justify-content: center;
+        margin-left: 0.5rem;
+
+        img {
+          width: 50%;
+          aspect-ratio: 1/1;
+          padding: 0;
+          margin: 0;
+        }
+      }
+
+      .product-price-row {
+        text-align: right;
+        padding-right: 1.2rem;
+        font-size: small;
+        z-index: 1;
+      }
+
+      .bg-circle {
+        background-color: #00031e39;
+        border-radius: 50%;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .skeleton-card {
+      .skeleton-circle {
+        background-color: #00031e39;
+        border-radius: 50%;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .search-bar {
+      input {
+        padding: 0.5rem 2.5rem 0.5rem 4.6rem;
+        font-size: 0.9rem;
+        background-position: 12px 5px;
+        background-size: 11px 11px;
+      }
+    }
+    .product-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    .product-card {
+      aspect-ratio: auto;
+      .product-image-row img {
+        width: 60%;
+      }
+    }
+  }
+}
