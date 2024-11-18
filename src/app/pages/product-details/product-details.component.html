@@ -14,8 +14,23 @@
 
     <!-- Rating -->
     <div class="rating">
-      <span *ngFor="let star of [1, 2, 3, 4, 5]" class="star"> ★ </span>
-      <span class="reviews">({{ product?.rating?.count || 0 }} reviews)</span>
+      <span
+        *ngFor="let star of stars; let i = index"
+        [ngClass]="{
+          'star-filled': star === 'filled',
+          'star-half': star === 'half',
+          'star-empty': star === 'empty'
+        }"
+        class="star"
+      >
+        ★
+      </span>
+      <span class="reviews"
+        >{{ product?.rating?.rate || 0 }} ({{
+          product?.rating?.count || 0
+        }}
+        reviews)</span
+      >
     </div>
 
     <!-- Description -->
@@ -30,7 +45,6 @@
         <button class="quality-button">Basic</button>
         <button class="quality-button">Premium</button>
       </div>
-
     </div>
 
     <!-- Price -->

@@ -65,15 +65,32 @@
       margin-bottom: 1rem;
 
       .star {
-        align-self: center;
-        color: #00031E;
-        font-size: 1.5rem;
+        font-size:2.2rem;
+        letter-spacing: .4rem;
         margin-right: 0.2rem;
-        margin-bottom: .2rem;
+        margin-bottom: .5rem;
+
+
+        &-filled {
+          color: #00031E; // Gold for filled stars
+        }
+
+        &-half {
+          color: #00031E; // Gold for half-filled stars
+          background: linear-gradient(to right, #00031E 50%, #e0e0e0 50%);
+          -webkit-background-clip: text; /* For Chrome, Safari */
+          -moz-background-clip: text; /* For Firefox (not standard, added for precaution) */
+          background-clip: text; /* Standard */
+          -webkit-text-fill-color: transparent; /* To make the unfilled area transparent */
+        }
+
+        &-empty {
+          color: #e0e0e0; // Light gray for empty stars
+        }
       }
 
       .reviews {
-        font-size: .7rem;
+        font-size: 0.8rem;
         color: #00031E;
         margin-left: 0.5rem;
         font-weight: normal;

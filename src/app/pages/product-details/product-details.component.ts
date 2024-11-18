@@ -25,11 +25,27 @@ export class ProductDetailsComponent implements OnInit {
       this.productsService.getProductById(productId).subscribe({
         next: (data) => {
           this.product = data;
+          this.generateStars(this.product.rating.rate);
         },
         error: (err) => {
           console.error('Error fetching product:', err);
         },
       });
+    }
+  }
+
+  stars: ('filled' | 'half' | 'empty')[] = [];
+
+  generateStars(rating: number): void {
+    this.stars = [];
+    for (let i = 1; i <= 5; i++) {
+      if (rating >= i) {
+        this.stars.push('filled');
+      } else if (rating > i - 1) {
+        this.stars.push('half');
+      } else {
+        this.stars.push('empty');
+      }
     }
   }
 }
