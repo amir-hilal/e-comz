@@ -41,6 +41,7 @@ export class WeatherComponent implements OnInit {
   loadingStates: { [key: string]: boolean } = {};
   errors: { [key: string]: string | null } = {};
   timeLoaded: { [key: string]: string } = {};
+  lastFetchedDateRange: { [key: string]: { start: string; end: string } } = {};
 
   dateRange = {
     start: new Date('2024-11-04'), // Default start date
@@ -62,6 +63,21 @@ export class WeatherComponent implements OnInit {
       return;
     }
 
+    const newDateRange = {
+      start: this.dateRange.start.toISOString().split('T')[0],
+      end: this.dateRange.end.toISOString().split('T')[0],
+    };
+
+    // Check if data has already been fetched for this city with the same date range
+    const lastRange = this.lastFetchedDateRange[cityKey];
+    if (
+      this.weatherData[cityKey] &&
+      lastRange?.start === newDateRange.start &&
+      lastRange?.end === newDateRange.end
+    ) {
+      return; // No need to refetch data
+    }
+
     this.loadingStates[cityKey] = true;
     this.errors[cityKey] = null;
 
@@ -69,8 +85,8 @@ export class WeatherComponent implements OnInit {
       const data = await this.weatherService.fetchWeatherData({
         latitude: city.latitude,
         longitude: city.longitude,
-        start_date: this.dateRange.start.toISOString().split('T')[0],
-        end_date: this.dateRange.end.toISOString().split('T')[0],
+        start_date: newDateRange.start,
+        end_date: newDateRange.end,
         hourly: 'temperature_2m',
       });
 
@@ -83,6 +99,7 @@ export class WeatherComponent implements OnInit {
 
       this.weatherData[cityKey] = dataSource;
       this.timeLoaded[cityKey] = new Date().toISOString();
+      this.lastFetchedDateRange[cityKey] = newDateRange; // Update the fetched date range
     } catch (err) {
       this.errors[cityKey] = `Failed to load weather data for ${city.name}`;
     } finally {
