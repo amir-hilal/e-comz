@@ -9,6 +9,7 @@
   <ul class="nav-links">
     <li><a [routerLink]="['/about']">About Us</a></li>
     <li><a [routerLink]="['/support']">Support</a></li>
+    <li><a [routerLink]="['/weather']">Weather</a></li>
     @if (isAuthenticated()) {
     <li>
       <a (click)="onLogout()">Sign Out</a>
@@ -45,6 +46,7 @@
   <mat-menu #menu="matMenu">
     <button mat-menu-item [routerLink]="['/about']">About Us</button>
     <button mat-menu-item [routerLink]="['/support']">Support</button>
+    <button mat-menu-item [routerLink]="['/weather']">Weather</button>
     @if (isAuthenticated()) {
     <button mat-menu-item (click)="onLogout()">Sign Out</button>
     }
