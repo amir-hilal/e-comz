@@ -4,22 +4,163 @@
 @use '@angular/material' as mat;
 // Plus imports for other components in your app.
 
+
+:root {
+  --custom-primary: #C17969;
+  --custom-secondary: #394E85;
+  --custom-background: #292F42;
+  --custom-surface: #00031E;
+  --custom-error: #B00020;
+}
+
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
 @include mat.core();
+// Define your custom primary palette
+$custom-primary-palette: mat.m2-define-palette((
+  50: #0D0F1D,  // Previously secondary's darkest
+  100: #181F37,
+  200: #232F51,
+  300: #2E3F6B,
+  400: #394E85,
+  500: #292F42,  // Main custom primary color
+  600: #7C4B43,  // Previously primary's darkest
+  700: #8E574D,
+  800: #A06356,
+  900: #B16E60,
+  A100: #FDE5E2,
+  A200: #FCCAC6,
+  A400: #FBB0A9,
+  A700: #FA9992,
+  contrast: (
+    50: rgba(255, 255, 255, 1),
+    100: rgba(255, 255, 255, 1),
+    200: rgba(255, 255, 255, 1),
+    300: rgba(255, 255, 255, 1),
+    400: rgba(255, 255, 255, 1),
+    500: rgba(255, 255, 255, 1),
+    600: rgba(255, 255, 255, 1),
+    700: rgba(255, 255, 255, 1),
+    800: rgba(255, 255, 255, 1),
+    900: rgba(255, 255, 255, 1),
+  ),
+));
 
-// Define the theme object.
-$e-comz-theme: mat.define-theme((
+// Define your custom secondary palette
+$custom-secondary-palette: mat.m2-define-palette((
+
+  50: #F8EAE7,
+  100: #F1D3CB,
+  200: #EABCB0,
+  300: #E2A494,
+  400: #DA8D79,
+  500: #C17969, // Main custom primary color
+  600: #B16E60,
+  700: #A06356,
+  800: #8E574D,
+  900: #7C4B43,
+  A100: #FDE5E2,
+  A200: #FCCAC6,
+  A400: #FBB0A9,
+  A700: #FA9992,
+  contrast: (
+    50: rgba(0, 0, 0, 0.87),
+    100: rgba(0, 0, 0, 0.87),
+    200: rgba(0, 0, 0, 0.87),
+    300: rgba(0, 0, 0, 0.87),
+    400: rgba(0, 0, 0, 0.87),
+    500: rgba(255, 255, 255, 1),
+    600: rgba(255, 255, 255, 1),
+    700: rgba(255, 255, 255, 1),
+    800: rgba(255, 255, 255, 1),
+    900: rgba(255, 255, 255, 1),
+  ),
+));
+
+// Define the custom background palette with all required hues
+$custom-background-palette: mat.m2-define-palette((
+  50: var(--custom-background),
+  100: var(--custom-surface),
+  200: var(--custom-surface),
+  300: var(--custom-surface),
+  400: var(--custom-surface),
+  500: var(--custom-background),
+  600: var(--custom-background),
+  700: var(--custom-background),
+  800: var(--custom-background),
+  900: var(--custom-background),
+  contrast: (
+    50: rgba(255, 255, 255, 1),
+    100: rgba(255, 255, 255, 1),
+    200: rgba(255, 255, 255, 1),
+    300: rgba(255, 255, 255, 1),
+    400: rgba(255, 255, 255, 1),
+    500: rgba(255, 255, 255, 1),
+    600: rgba(255, 255, 255, 1),
+    700: rgba(255, 255, 255, 1),
+    800: rgba(255, 255, 255, 1),
+    900: rgba(255, 255, 255, 1),
+  ),
+));
+
+// Define your custom accent palette
+$custom-accent-palette: mat.m2-define-palette((
+  50: #EBF2FF,
+  100: #D7E5FF,
+  200: #C2D8FF,
+  300: #ADC9FF,
+  400: #97BAFF,
+  500: #8397BA, // Custom accent color
+  600: #7283A1,
+  700: #606F88,
+  800: #4E5B6F,
+  900: #3C4756,
+  contrast: (
+    50: rgba(0, 0, 0, 0.87),
+    100: rgba(0, 0, 0, 0.87),
+    200: rgba(0, 0, 0, 0.87),
+    300: rgba(0, 0, 0, 0.87),
+    400: rgba(0, 0, 0, 0.87),
+    500: rgba(255, 255, 255, 1),
+    600: rgba(255, 255, 255, 1),
+    700: rgba(255, 255, 255, 1),
+    800: rgba(255, 255, 255, 1),
+    900: rgba(255, 255, 255, 1),
+  ),
+));
+
+// Define the custom error palette
+$custom-error-palette: mat.m2-define-palette((
+  50: #FFEBEE,
+  100: #FFCDD2,
+  200: #EF9A9A,
+  300: #E57373,
+  400: #EF5350,
+  500: var(--custom-error),
+  600: #D32F2F,
+  700: #C62828,
+  800: #B71C1C,
+  900: #B00020,
+  contrast: (
+    500: rgba(255, 255, 255, 1),
+  ),
+));
+
+// Define the theme object
+$e-comz-theme: mat.m2-define-light-theme((
   color: (
-    theme-type: light,
-    primary: mat.$azure-palette,
-    tertiary: mat.$blue-palette,
+    primary: $custom-primary-palette,
+    secondary: $custom-secondary-palette,
+    background: $custom-background-palette,
+    accent: $custom-accent-palette, // Add the accent palette here
+    error: $custom-error-palette,
   ),
   density: (
     scale: 0,
-  )
+  ),
 ));
+
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
