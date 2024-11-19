@@ -1,43 +1,89 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
 import { WeatherService } from '../../services/api/weather.service';
 
 @Component({
   selector: 'app-weather',
   templateUrl: './weather.component.html',
-  standalone: true,
-  imports: [CommonModule],
   styleUrls: ['./weather.component.scss'],
+  standalone: true,
+  imports: [
+    MatPaginatorModule,
+    MatTabsModule,
+    MatTableModule,
+    CommonModule,
+    MatProgressSpinnerModule,
+  ],
 })
 export class WeatherComponent implements OnInit {
-  weatherData: any;
-  isLoading = false;
-  error: string | null = null;
+  cities = [
+    { name: 'Berlin', latitude: 52.52, longitude: 13.41 },
+    { name: 'London', latitude: 51.51, longitude: -0.13 },
+    { name: 'New York', latitude: 40.71, longitude: -74.01 },
+  ];
+
+  weatherData: { [key: string]: MatTableDataSource<any> } = {};
+  loadingStates: { [key: string]: boolean } = {};
+  errors: { [key: string]: string | null } = {};
+  timeLoaded: { [key: string]: string } = {};
 
   constructor(private weatherService: WeatherService) {}
 
   ngOnInit(): void {
-    this.loadWeatherData();
+    // Fetch data for the first tab initially
+    this.loadCityWeather(this.cities[0]);
   }
 
-  async loadWeatherData(): Promise<void> {
-    this.isLoading = true;
-    this.error = null;
+  async loadCityWeather(city: any): Promise<void> {
+    const cityKey = city.name;
 
-    const params = {
-      latitude: 52.52,
-      longitude: 13.41,
-      start_date: '2024-11-04',
-      end_date: '2024-11-17',
-      hourly: 'temperature_2m',
-    };
+    if (this.weatherData[cityKey]) {
+      // Data already loaded, no need to re-fetch
+      return;
+    }
+
+    this.loadingStates[cityKey] = true;
+    this.errors[cityKey] = null;
 
     try {
-      this.weatherData = await this.weatherService.fetchWeatherData(params);
+      const data = await this.weatherService.fetchWeatherData({
+        latitude: city.latitude,
+        longitude: city.longitude,
+        start_date: '2024-11-04',
+        end_date: '2024-11-17',
+        hourly: 'temperature_2m',
+      });
+
+      const dataSource = new MatTableDataSource(
+        data.hourly.temperature2m.map((temp: number, index: number) => ({
+          time: data.hourly.time[index],
+          temperature: temp,
+        }))
+      );
+
+      this.weatherData[cityKey] = dataSource;
+      this.timeLoaded[cityKey] = new Date().toISOString();
     } catch (err) {
-      this.error = 'Failed to load weather data';
+      this.errors[cityKey] = `Failed to load weather data for ${city.name}`;
     } finally {
-      this.isLoading = false;
+      this.loadingStates[cityKey] = false;
     }
+  }
+
+  onTabChange(index: number): void {
+    const city = this.cities[index];
+    this.loadCityWeather(city);
+  }
+
+  onPageChange(event: PageEvent, cityKey: string): void {
+    const dataSource = this.weatherData[cityKey];
+    const startIndex = event.pageIndex * event.pageSize;
+    const endIndex = startIndex + event.pageSize;
+
+    dataSource.data = dataSource.data.slice(startIndex, endIndex);
   }
 }

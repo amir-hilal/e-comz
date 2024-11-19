@@ -1,25 +1,57 @@
-<div class="weather-container">
-  @if (isLoading) {
-  <div class="loading-spinner">Loading...</div>
-  } @if (error) {
-  <div class="error-message">{{ error }}</div>
-  } @if (weatherData && !isLoading && !error) {
-  <div class="weather-data">
-    <h2>Hourly Weather Data</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Time</th>
-          <th>Temperature (°C)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let time of weatherData.hourly.time; let i = index">
-          <td>{{ time.toISOString() }}</td>
-          <td>{{ weatherData.hourly.temperature2m[i] }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  }
-</div>
+<mat-tab-group (selectedIndexChange)="onTabChange($event)">
+  <mat-tab *ngFor="let city of cities" [label]="city.name">
+    <ng-template matTabContent>
+      <!-- Loading Indicator -->
+      @if (loadingStates[city.name]) {
+      <div class="loading"><mat-spinner></mat-spinner></div>
+      }
+
+      <!-- Error Message -->
+      @if (errors[city.name]) {
+      <div class="error">{{ errors[city.name] }}</div>
+      }
+
+      <!-- Weather Data Table -->
+      @if (weatherData[city.name] && !errors[city.name]) {
+      <div>
+        <h3>{{ city.name }} Weather</h3>
+        <p>Loaded: {{ timeLoaded[city.name] | date : "medium" }}</p>
+
+        <table
+          mat-table
+          [dataSource]="weatherData[city.name]"
+          class="mat-elevation-z8"
+        >
+          <ng-container matColumnDef="time">
+            <th mat-header-cell *matHeaderCellDef>Time</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.time | date : "medium" }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="temperature">
+            <th mat-header-cell *matHeaderCellDef>Temperature (°C)</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.temperature }}
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="['time', 'temperature']"></tr>
+          <tr
+            mat-row
+            *matRowDef="let row; columns: ['time', 'temperature']"
+          ></tr>
+        </table>
+
+        <mat-paginator
+          [pageSize]="10"
+          [pageSizeOptions]="[5, 10, 25, 100]"
+          aria-label="Select page"
+          [length]="weatherData[city.name].data.length"
+          (page)="onPageChange($event, city.name)"
+        ></mat-paginator>
+      </div>
+      }
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>
