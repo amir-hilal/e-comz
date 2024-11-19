@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -12,7 +11,6 @@ import { WeatherService } from '../../services/api/weather.service';
   styleUrls: ['./weather.component.scss'],
   standalone: true,
   imports: [
-    MatPaginatorModule,
     MatTabsModule,
     MatTableModule,
     CommonModule,
@@ -77,13 +75,5 @@ export class WeatherComponent implements OnInit {
   onTabChange(index: number): void {
     const city = this.cities[index];
     this.loadCityWeather(city);
-  }
-
-  onPageChange(event: PageEvent, cityKey: string): void {
-    const dataSource = this.weatherData[cityKey];
-    const startIndex = event.pageIndex * event.pageSize;
-    const endIndex = startIndex + event.pageSize;
-
-    dataSource.data = dataSource.data.slice(startIndex, endIndex);
   }
 }

@@ -42,14 +42,6 @@
             *matRowDef="let row; columns: ['time', 'temperature']"
           ></tr>
         </table>
-
-        <mat-paginator
-          [pageSize]="10"
-          [pageSizeOptions]="[5, 10, 25, 100]"
-          aria-label="Select page"
-          [length]="weatherData[city.name].data.length"
-          (page)="onPageChange($event, city.name)"
-        ></mat-paginator>
       </div>
       }
     </ng-template>
