@@ -31,13 +31,17 @@
           <mat-datepicker #endPicker></mat-datepicker>
         </mat-form-field>
 
-        <button
-          mat-raised-button
-          color="primary"
-          (click)="loadCityWeather(city)"
-        >
-          Fetch Weather
-        </button>
+        
+        <div>
+          <button
+            mat-raised-button
+            color="primary"
+            class="fetch-weather-button"
+            (click)="loadCityWeather(city)"
+          >
+            Fetch Weather
+          </button>
+        </div>
       </div>
 
       <!-- Loading Indicator -->

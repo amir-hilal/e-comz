@@ -1,28 +1,21 @@
-.weather-container {
-  text-align: center;
-  padding: 20px;
+.date-picker-container{
+  display: flex;
+  gap:2rem;
+  margin-top: 2rem;
+
+  .fetch-weather-button{
+    height: 74%;
+  }
 }
 
-.loading-spinner {
-  color: #007bff;
+::ng-deep .mdc-tab__text-label {
+  font-weight: bold;
 }
 
-.error-message {
-  color: red;
+:host ::ng-deep .mat-elevation-z8 {
+  background-color: rgba(255, 255, 255, 0.2);
 }
+:host ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled){
+  background-color: rgba(255, 255, 255, 0.6   );
 
-.weather-data table {
-  width: 100%;
-  border-collapse: collapse;
 }
-
-.weather-data th, .weather-data td {
-  border: 1px solid #ccc;
-  padding: 10px;
-  text-align: center;
-}
-
-.weather-data th {
-  background-color: transparent;
-}
-

@@ -222,3 +222,7 @@ div {
 }
 
 
+:root .mat-mdc-tab-group,
+:root .mat-mdc-tab-nav-bar {
+  --mat-tab-header-inactive-label-text-color: rgb(255 255 255 / 60%);
+}
