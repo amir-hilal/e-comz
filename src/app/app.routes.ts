@@ -1,16 +1,16 @@
 import { Routes } from '@angular/router';
-import { CartComponent } from './cart/cart.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { AboutComponent } from './pages/about/about.component';
 import { AuthWrapperComponent } from './pages/auth/auth-wrapper.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
+import { CartComponent } from './pages/cart/cart.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 import { SupportComponent } from './pages/support/support.component';
-import { AuthGuard } from './services/guards/auth.guard';
 import { WeatherComponent } from './pages/weather/weather.component';
+import { AuthGuard } from './services/guards/auth.guard';
 
 export const routes: Routes = [
   {

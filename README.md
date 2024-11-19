@@ -13,7 +13,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 | ------------------------------------------- | ----------------------------------------- |
 | ![Landing](./readme/assets/Login.png)  | ![Landing](./readme/assets/Register.png) |
 | Home screen                              | Cart screen                              |
-| ![Landing](./readme/assets/Home.png)  | ![Landing](./readme/assets/Cart.png) |
+| ![Landing](./readme/assets/Home.png)  | ![Landing](./readme/assets/ProductDetails.png) |
 
 
 
