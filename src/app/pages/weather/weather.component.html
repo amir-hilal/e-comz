@@ -1,6 +1,45 @@
 <mat-tab-group (selectedIndexChange)="onTabChange($event)">
   <mat-tab *ngFor="let city of cities" [label]="city.name">
     <ng-template matTabContent>
+      <!-- Date Range Picker -->
+      <div class="date-picker-container">
+        <mat-form-field appearance="fill">
+          <mat-label>Start Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="startPicker"
+            [(ngModel)]="dateRange.start"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="startPicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #startPicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>End Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="endPicker"
+            [(ngModel)]="dateRange.end"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="endPicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #endPicker></mat-datepicker>
+        </mat-form-field>
+
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="loadCityWeather(city)"
+        >
+          Fetch Weather
+        </button>
+      </div>
+
       <!-- Loading Indicator -->
       @if (loadingStates[city.name]) {
       <div class="loading"><mat-spinner></mat-spinner></div>

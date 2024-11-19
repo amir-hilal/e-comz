@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -13,9 +19,16 @@ import { WeatherService } from '../../services/api/weather.service';
   imports: [
     MatTabsModule,
     MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatDatepickerModule,
     CommonModule,
+    FormsModule,
     MatProgressSpinnerModule,
+    MatNativeDateModule,
   ],
+  providers: [MatDatepickerModule],
 })
 export class WeatherComponent implements OnInit {
   cities = [
@@ -29,6 +42,11 @@ export class WeatherComponent implements OnInit {
   errors: { [key: string]: string | null } = {};
   timeLoaded: { [key: string]: string } = {};
 
+  dateRange = {
+    start: new Date('2024-11-04'), // Default start date
+    end: new Date('2024-11-17'), // Default end date
+  };
+
   constructor(private weatherService: WeatherService) {}
 
   ngOnInit(): void {
@@ -39,8 +57,8 @@ export class WeatherComponent implements OnInit {
   async loadCityWeather(city: any): Promise<void> {
     const cityKey = city.name;
 
-    if (this.weatherData[cityKey]) {
-      // Data already loaded, no need to re-fetch
+    if (!this.dateRange.start || !this.dateRange.end) {
+      this.errors[cityKey] = 'Please select a valid date range.';
       return;
     }
 
@@ -51,8 +69,8 @@ export class WeatherComponent implements OnInit {
       const data = await this.weatherService.fetchWeatherData({
         latitude: city.latitude,
         longitude: city.longitude,
-        start_date: '2024-11-04',
-        end_date: '2024-11-17',
+        start_date: this.dateRange.start.toISOString().split('T')[0],
+        end_date: this.dateRange.end.toISOString().split('T')[0],
         hourly: 'temperature_2m',
       });
 
