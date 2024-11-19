@@ -2,31 +2,33 @@
   <h1>Your Cart</h1>
 
   <!-- Empty Cart Message -->
-  <div *ngIf="cartService.items().length === 0" class="empty-cart">
+  @if (cartService.items().length === 0) {
+  <div class="empty-cart">
     <p>Your cart is empty!</p>
     <button class="back-button" (click)="navigateToHome()">Back to Home</button>
   </div>
+  }
 
   <!-- Cart Items -->
-  <div *ngIf="cartService.items().length > 0">
-    <div class="cart-items">
-      <div *ngFor="let item of cartService.items()" class="cart-item">
-        <img [src]="item.image" [alt]="item.title" />
-        <div class="item-details">
-          <h3>{{ item.title }}</h3>
-          <p>Price: ${{ item.price }}</p>
-          <p>Quantity: {{ item.quantity }}</p>
-        </div>
-        <div class="item-actions">
-          <button (click)="removeItem(item.id)">Remove</button>
-        </div>
+  @if (cartService.items().length > 0) {
+  <div class="cart-items">
+    <div *ngFor="let item of cartService.items()" class="cart-item">
+      <img [src]="item.image" [alt]="item.title" />
+      <div class="item-details">
+        <h3>{{ item.title }}</h3>
+        <p>Price: ${{ item.price }}</p>
+        <p>Quantity: {{ item.quantity }}</p>
+      </div>
+      <div class="item-actions">
+        <button (click)="removeItem(item.id)">Remove</button>
       </div>
     </div>
-
-    <!-- Cart Total -->
-    <div class="cart-summary">
-      <h2>Total: ${{ totalPrice }}</h2>
-      <button class="clear-button" (click)="clearCart()">Clear Cart</button>
-    </div>
   </div>
+
+  <!-- Cart Total -->
+  <div class="cart-summary">
+    <h2>Total: ${{ totalPrice }}</h2>
+    <button class="clear-button" (click)="clearCart()">Clear Cart</button>
+  </div>
+  }
 </div>

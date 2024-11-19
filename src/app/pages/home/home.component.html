@@ -15,17 +15,14 @@
     </div>
   </section>
 
-  <!-- product listing and details / explore categories -->
+  <!-- Product Listing and Details / Explore Categories -->
   <div class="products-section">
-    <!-- featured product  -->
+    <!-- Featured Product -->
     <div class="products-details-categories">
       <div class="featured-product">
         <!-- Container for synchronized fade in/out animation -->
-        <div
-          class="flex-space-between"
-          *ngIf="showFeaturedProduct() && recommendedProduct()"
-          @fadeInOut
-        >
+        @if (showFeaturedProduct() && recommendedProduct()) {
+        <div class="flex-space-between" @fadeInOut>
           <div>
             <h2>{{ recommendedProduct()?.title }}</h2>
             <p class="featured-product-category">
@@ -39,22 +36,24 @@
             </p>
             <!-- Image with fadeInOut animation and placeholder -->
             <div class="featured-product-image">
-              <div class="image-placeholder" *ngIf="!imageLoaded()"></div>
+              @if (!imageLoaded()) {
+              <div class="image-placeholder"></div>
+              } @if (recommendedProduct()) {
               <img
-                *ngIf="recommendedProduct()"
                 [src]="recommendedProduct()?.image"
                 alt="{{ recommendedProduct()?.title }}"
                 (load)="imageLoaded.set(true)"
               />
+              }
             </div>
           </div>
 
           <!-- Title, Category, and Price -->
-
           <p class="featured-product-price">
             ${{ recommendedProduct()?.price }}
           </p>
         </div>
+        }
       </div>
 
       <!-- Categories Section -->
@@ -62,7 +61,8 @@
         <h3>Explore Categories</h3>
         <div class="category-grid">
           <!-- Skeleton placeholders when categories are loading -->
-          <ng-container *ngIf="loadingCategories">
+          @if (loadingCategories) {
+          <ng-container>
             <div
               class="category-card skeleton-card"
               *ngFor="let _ of skeletonArray"
@@ -70,13 +70,16 @@
               <div class="skeleton-title"></div>
             </div>
           </ng-container>
+          }
 
           <!-- Actual category cards -->
-          <ng-container *ngIf="!loadingCategories">
+          @if (!loadingCategories) {
+          <ng-container>
             <div class="category-card" *ngFor="let category of categories()">
               <h4>{{ category }}</h4>
             </div>
           </ng-container>
+          }
         </div>
       </div>
     </div>

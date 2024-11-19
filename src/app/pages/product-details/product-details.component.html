@@ -52,10 +52,9 @@
 
     <!-- Add to Cart Button -->
     <button class="add-to-cart-button" (click)="addToCart()">
-      Add to cart
-      <span *ngIf="getProductQuantity(product?.id) > 0">
-        ({{ getProductQuantity(product?.id) }})
-      </span>
+      Add to cart @if (getProductQuantity(product?.id) > 0) {
+      <span> ({{ getProductQuantity(product?.id) }}) </span>
+      }
     </button>
   </div>
 </div>
