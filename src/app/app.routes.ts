@@ -10,6 +10,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 import { SupportComponent } from './pages/support/support.component';
 import { AuthGuard } from './services/guards/auth.guard';
+import { WeatherComponent } from './pages/weather/weather.component';
 
 export const routes: Routes = [
   {
@@ -66,7 +67,12 @@ export const routes: Routes = [
         path: 'cart',
         component: CartComponent,
         data: { animation: 'ProductDetailsPage' },
-      }, 
+      },
+      {
+        path: 'weather',
+        component: WeatherComponent,
+        data: { animation: 'WeatherPage' },
+      },
 
       // { path: 'cart', component: CartComponent },
       // { path: 'product/:id', component: ProductDetailsComponent },

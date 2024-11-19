@@ -1,0 +1,27 @@
+.weather-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.loading-spinner {
+  color: #007bff;
+}
+
+.error-message {
+  color: red;
+}
+
+.weather-data table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.weather-data th, .weather-data td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+.weather-data th {
+  background-color: #f4f4f4;
+}

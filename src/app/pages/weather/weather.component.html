@@ -1,0 +1,25 @@
+<div class="weather-container">
+  @if (isLoading) {
+  <div class="loading-spinner">Loading...</div>
+  } @if (error) {
+  <div class="error-message">{{ error }}</div>
+  } @if (weatherData && !isLoading && !error) {
+  <div class="weather-data">
+    <h2>Hourly Weather Data</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>Temperature (°C)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let time of weatherData.hourly.time; let i = index">
+          <td>{{ time.toISOString() }}</td>
+          <td>{{ weatherData.hourly.temperature2m[i] }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  }
+</div>
