@@ -2,6 +2,7 @@ import { InjectionToken } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 import { of } from 'rxjs';
 import { LayoutComponent } from './layout.component';
@@ -26,7 +27,7 @@ describe('LayoutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LayoutComponent],
+      imports: [LayoutComponent, BrowserAnimationsModule],
       providers: [
         { provide: AngularFireAuth, useClass: MockAngularFireAuth },
         { provide: AngularFirestore, useClass: MockAngularFirestore },
@@ -34,7 +35,7 @@ describe('LayoutComponent', () => {
           provide: new InjectionToken('angularfire2.app.options'),
           useValue: mockFirebaseConfig,
         },
-        provideRouter([]), 
+        provideRouter([]),
       ],
     }).compileComponents();
 
