@@ -58,7 +58,12 @@ export class WeatherComponent implements OnInit {
   async loadCityWeather(city: any): Promise<void> {
     const cityKey = city.name;
 
-    if (!this.dateRange.start || !this.dateRange.end) {
+    if (
+      !this.dateRange.start ||
+      !this.dateRange.end ||
+      isNaN(this.dateRange.start.getTime()) ||
+      isNaN(this.dateRange.end.getTime())
+    ) {
       this.errors[cityKey] = 'Please select a valid date range.';
       return;
     }
@@ -67,7 +72,6 @@ export class WeatherComponent implements OnInit {
       start: this.dateRange.start.toISOString().split('T')[0],
       end: this.dateRange.end.toISOString().split('T')[0],
     };
-
     // Check if data has already been fetched for this city with the same date range
     const lastRange = this.lastFetchedDateRange[cityKey];
     if (
