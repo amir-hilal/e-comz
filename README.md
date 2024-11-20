@@ -6,21 +6,29 @@ EComz is an e-commerce platform built as part of an assessment project with the 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.11. EComz utilizes the latest Angular practices, aiming to provide a seamless shopping experience for users.
 
-
 ### User Screens (Web)
 
-| Login screen                                | Register screen                            |
-| ------------------------------------------- | ----------------------------------------- |
-| ![Landing](./readme/assets/Login.png)  | ![Landing](./readme/assets/Register.png) |
-| Home screen                              | Cart screen                              |
+| Login screen                          | Register screen                                |
+| ------------------------------------- | ---------------------------------------------- |
+| ![Landing](./readme/assets/Login.png) | ![Landing](./readme/assets/Register.png)       |
+| Home screen                           | Cart screen                                    |
 | ![Landing](./readme/assets/Home.png)  | ![Landing](./readme/assets/ProductDetails.png) |
-| Cart screen                              | Weather screen                              |
-| ![Landing](./readme/assets/Cart.png)  | ![Landing](./readme/assets/Weather.png) |
-
+| Cart screen                           | Weather screen                                 |
+| ![Landing](./readme/assets/Cart.png)  | ![Landing](./readme/assets/Weather.png)        |
 
 ### Project Guide
 
 The project is guided by **ITXI** with mentorship and oversight from **Hussein Ghandour** (h.ghandour@itxi.net).
+
+## Technologies Used
+
+- **Framework**: Angular
+- **Authentication**: Firebase Authentication ([Firebase Docs](https://firebase.google.com/docs/auth))
+- **UI Library**: Angular Material ([Angular Material Docs](https://material.angular.io/))
+- **State Management**: Angular Signals ([Angular Signals](https://angular.dev/guide/signals))
+- **Third-Party APIs**:
+  - [FakeStore API](https://fakestoreapi.com/) for product data.
+  - [Open-Meteo API](https://open-meteo.com/) for weather data.
 
 ## Development server
 
@@ -66,6 +74,23 @@ These are the primary npm scripts used in this project:
 - **`start`**: Configures environment variables and starts the development server.
 - **`config`**: Processes `.env` variables into the Angular environment file.
 - **`build:prod`**: Builds the project for production, including environment configuration.
+
+## Features
+
+### Core Functionality
+
+- **User Authentication**: Implements Firebase Authentication with support for:
+  - Email or username and password login.
+  - Google Sign-In ([Firebase Authentication](https://firebase.google.com/docs/auth)).
+- **Product Listings**: Displays products fetched from the FakeStore API ([FakeStore API](https://fakestoreapi.com/)).
+- **Weather Integration**: Fetches weather data for different cities using the Open-Meteo API ([Open-Meteo API](https://open-meteo.com/)).
+
+### Design and State Management
+
+- **Consistent Design**: Utilizes Angular Material ([Angular Material](https://material.angular.io/)) for a cohesive and responsive UI.
+- **State Management**: Leverages Angular Signals ([Angular Signals](https://angular.dev/guide/signals/)) for efficient state handling, including:
+  - Managing loading, success, and error states.
+  - Real-time updates for cart and product interactions.
 
 ## Authentication Module
 
@@ -172,6 +197,58 @@ The authentication functionality is thoroughly tested using unit tests, with tes
   - `should handle featured product rotation`: Verifies the behavior of the featured product rotation.
 - **Actions**:
   - `should call logout and navigate to login page`: Ensures that the logout functionality works correctly.
+
+### WeatherComponent Unit Tests
+
+- **Initialization**:
+
+  - `should create`: Verifies that the `WeatherComponent` is created successfully.
+
+- **Data Fetching**:
+
+  - `should initialize and load weather data for the first city`: Ensures that weather data is fetched and displayed for the default city on initialization.
+  - `should update weather data when the date range changes`: Verifies that weather data is updated appropriately when the user selects a new date range.
+  - `should not re-fetch weather data if the date range has not changed`: Confirms that duplicate API calls are avoided when the selected date range matches the previously fetched range.
+
+- **Error Handling**:
+
+  - `should show an error message if the date range is invalid`: Ensures that users are notified when they provide an invalid date range.
+  - `should display an error message if the weather data fails to load`: Verifies that appropriate error messages are displayed in case of API failure.
+
+- **Loading States**:
+
+  - `should display a loading spinner when fetching weather data`: Confirms that a loading spinner is shown while data is being fetched.
+  - `should hide the loading spinner once weather data is loaded`: Ensures the spinner is removed after data retrieval.
+
+- **Tabs and City Selection**:
+  - `should fetch weather data for the selected city when a new tab is clicked`: Verifies that the component fetches and displays weather data for the city corresponding to the selected tab.
+
+### WeatherService Unit Tests
+
+- **Initialization**:
+
+  - `should be created`: Verifies that the `WeatherService` is initialized successfully.
+
+- **API Integration**:
+
+  - `should fetch weather data for given city coordinates and date range`: Confirms that the service calls the Open-Meteo API with the correct parameters.
+  - `should throw an error if the API response is empty`: Validates that appropriate error handling is in place for empty API responses.
+  - `should process API data and return formatted weather information`: Ensures that the raw data from the API is correctly processed and formatted for use in the component.
+
+- **Utility Methods**:
+  - `should generate a time range from start to stop with a given step`: Verifies the correctness of the utility method that generates time ranges for weather data.
+
+---
+
+## WeatherComponent Overview
+
+The WeatherComponent allows users to:
+
+- View hourly temperature data for predefined cities.
+- Select date ranges to filter weather data.
+- Handle loading, error, and success states for better user experience.
+
+The WeatherComponent is implemented using Angular Signals for managing state and detecting changes efficiently. Signals enhance performance by reducing unnecessary re-renders and optimizing state updates.
 
 ---
 
