@@ -1,0 +1,99 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+  background-color: transparent;
+  color: white;
+
+  .logo a {
+    font-size: 2.2rem;
+    font-weight: normal;
+    color: white;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    gap: 1.5rem;
+    font-weight: lighter;
+
+    li a {
+      cursor: pointer;
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+  }
+
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+
+    .cart-icon{
+      display: flex;
+      cursor: pointer;
+      gap:1rem;
+      background-color: #f0f0f030;
+      padding: .5rem;
+      border-radius: 8px;
+      img{
+        width: 20px;
+      }
+    }
+    .cart-count {
+      right: -10px;
+      color: #ffffff; /* White text */
+      font-size: 0.8rem;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    button {
+      background-color: transparent;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    mat-icon {
+      font-size: 3rem; /* Adjust icon size */
+      color: #f0f0f0; /* Change icon color */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .auth-links {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+
+
+
+    .cart-icon.disabled {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
+    a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.1rem;
+    }
+  }
+
+  .auth-link {
+    cursor: pointer;
+    margin: 0 1rem;
+  }
+}

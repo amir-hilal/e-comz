@@ -1,0 +1,60 @@
+<div class="product-details-container">
+  <!-- Left Section -->
+  <div class="left-section">
+    <a class="back-link" [routerLink]="['/home']">← Back to home page</a>
+    <div class="product-image-wrapper">
+      <img [src]="product?.image" [alt]="product?.title" />
+    </div>
+  </div>
+
+  <!-- Right Section -->
+  <div class="right-section">
+    <h1>{{ product?.title }}</h1>
+    <p class="category">{{ product?.category }}</p>
+
+    <!-- Rating -->
+    <div class="rating">
+      <span
+        *ngFor="let star of stars; let i = index"
+        [ngClass]="{
+          'star-filled': star === 'filled',
+          'star-half': star === 'half',
+          'star-empty': star === 'empty'
+        }"
+        class="star"
+      >
+        ★
+      </span>
+      <span class="reviews"
+        >{{ product?.rating?.rate || 0 }} ({{
+          product?.rating?.count || 0
+        }}
+        reviews)</span
+      >
+    </div>
+
+    <!-- Description -->
+    <p class="description">
+      {{ product?.description }}
+    </p>
+
+    <!-- Quality Options -->
+    <div class="quality-options">
+      <h4>Select quality</h4>
+      <div class="quality-buttons-wrap">
+        <button class="quality-button">Basic</button>
+        <button class="quality-button">Premium</button>
+      </div>
+    </div>
+
+    <!-- Price -->
+    <h2 class="price">{{ product?.price | currency }}</h2>
+
+    <!-- Add to Cart Button -->
+    <button class="add-to-cart-button" (click)="addToCart()">
+      Add to cart @if (getProductQuantity(product?.id) > 0) {
+      <span> ({{ getProductQuantity(product?.id) }}) </span>
+      }
+    </button>
+  </div>
+</div>

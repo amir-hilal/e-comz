@@ -1,0 +1,178 @@
+.product-details-container {
+  display: grid;
+  grid-template-columns: 2fr 5fr;
+  gap: 6rem;
+  padding: 1rem 0;
+  color: white;
+  margin-top: 2rem;
+  /* Left Section */
+  .left-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .back-link {
+      font-size: 1rem;
+      font-weight: lighter;
+      color: white;
+      text-decoration: none;
+      cursor: pointer;
+
+      &:hover {
+        color: #ffe59e;
+      }
+    }
+
+    .product-image-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background-color: #00031e39;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 12px;
+
+      img {
+        width: 80%;
+        height: auto;
+        border-radius: 12px;
+      }
+    }
+  }
+
+  /* Right Section */
+  .right-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    h1 {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin:0;
+    }
+
+    .category {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin:0;
+    }
+
+    .rating {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+
+      .star {
+        font-size:2.2rem;
+        letter-spacing: .4rem;
+        margin-right: 0.2rem;
+        margin-bottom: .5rem;
+
+
+        &-filled {
+          color: #00031E; // Gold for filled stars
+        }
+
+        &-half {
+          color: #00031E; // Gold for half-filled stars
+          background: linear-gradient(to right, #00031E 50%, #e0e0e0 50%);
+          -webkit-background-clip: text; /* For Chrome, Safari */
+          -moz-background-clip: text; /* For Firefox (not standard, added for precaution) */
+          background-clip: text; /* Standard */
+          -webkit-text-fill-color: transparent; /* To make the unfilled area transparent */
+        }
+
+        &-empty {
+          color: #e0e0e0; // Light gray for empty stars
+        }
+      }
+
+      .reviews {
+        font-size: 0.8rem;
+        color: #00031E;
+        margin-left: 0.5rem;
+        font-weight: normal;
+      }
+    }
+
+    .description {
+      font-size: .7rem;
+      line-height: 1.5;
+      margin:0;
+
+    }
+
+    .quality-options {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      h4 {
+        font-size: 1rem;
+        font-weight: normal;
+        margin-bottom: 0.5rem;
+      }
+
+      .quality-buttons-wrap{
+        display: flex;
+        gap: 2rem;
+        .quality-button {
+          padding: 0.5rem 4.3rem;
+          font-size: .8rem;
+          color: white;
+          background-color: rgba(255, 255, 255, 0.2);
+          border: solid 1px white;
+          border-radius: 4px;
+          cursor: pointer;
+
+          &:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+          }
+        }
+      }
+
+    }
+
+    .price {
+      font-size: 1.2rem;
+      font-weight: normal;
+      margin-bottom: 1rem;
+    }
+
+    .add-to-cart-button {
+      padding: 0.6rem 1rem;
+      font-size: .8rem;
+      color: white;
+      background-color: #00031E;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #00031E80;
+      }
+    }
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .left-section {
+      align-items: center;
+
+      .back-link{
+        font-size: 1.2rem;
+      }
+    }
+
+    .product-image-wrapper img {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 568px) {
+    grid-template-columns: 1fr;
+
+  }
+}

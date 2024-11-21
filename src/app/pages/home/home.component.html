@@ -1,0 +1,91 @@
+<div class="home-container">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="row">
+      <h1>Express</h1>
+      <span class="gap"></span>
+      <h1>Yourself</h1>
+    </div>
+    <div class="row">
+      <h1 class="highlight">Through</h1>
+      <p class="typing-effect">
+        {{ currentQuote }}<span class="cursor"></span>
+      </p>
+      <h1 class="highlight">Style</h1>
+    </div>
+  </section>
+
+  <!-- Product Listing and Details / Explore Categories -->
+  <div class="products-section">
+    <!-- Featured Product -->
+    <div class="products-details-categories">
+      <div class="featured-product">
+        <!-- Container for synchronized fade in/out animation -->
+        @if (showFeaturedProduct() && recommendedProduct()) {
+        <div class="flex-space-between" @fadeInOut>
+          <div>
+            <h2>{{ recommendedProduct()?.title }}</h2>
+            <p class="featured-product-category">
+              {{ recommendedProduct()?.category }}
+            </p>
+          </div>
+
+          <div class="image-decription-wrap">
+            <p class="featured-product-description">
+              {{ recommendedProduct()?.description }}
+            </p>
+            <!-- Image with fadeInOut animation and placeholder -->
+            <div class="featured-product-image">
+              @if (!imageLoaded()) {
+              <div class="image-placeholder"></div>
+              } @if (recommendedProduct()) {
+              <img
+                [src]="recommendedProduct()?.image"
+                alt="{{ recommendedProduct()?.title }}"
+                (load)="imageLoaded.set(true)"
+              />
+              }
+            </div>
+          </div>
+
+          <!-- Title, Category, and Price -->
+          <p class="featured-product-price">
+            ${{ recommendedProduct()?.price }}
+          </p>
+        </div>
+        }
+      </div>
+
+      <!-- Categories Section -->
+      <div class="categories">
+        <h3>Explore Categories</h3>
+        <div class="category-grid">
+          <!-- Skeleton placeholders when categories are loading -->
+          @if (loadingCategories) {
+          <ng-container>
+            <div
+              class="category-card skeleton-card"
+              *ngFor="let _ of skeletonArray"
+            >
+              <div class="skeleton-title"></div>
+            </div>
+          </ng-container>
+          }
+
+          <!-- Actual category cards -->
+          @if (!loadingCategories) {
+          <ng-container>
+            <div class="category-card" *ngFor="let category of categories()">
+              <h4>{{ category }}</h4>
+            </div>
+          </ng-container>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="products-wrapper">
+      <app-products></app-products>
+    </div>
+  </div>
+</div>

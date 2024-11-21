@@ -1,0 +1,54 @@
+<nav class="navbar">
+  <!-- Logo Section -->
+  <div class="logo">
+    <a routerLink="/">E-Comz</a>
+  </div>
+
+  <!-- Nav Links Section -->
+  @if (!isMobile) {
+  <ul class="nav-links">
+    <li><a [routerLink]="['/about']">About Us</a></li>
+    <li><a [routerLink]="['/support']">Support</a></li>
+    <li><a [routerLink]="['/weather']">Weather</a></li>
+    @if (isAuthenticated()) {
+    <li>
+      <a (click)="onLogout()">Sign Out</a>
+    </li>
+    }
+  </ul>
+  }
+
+  <!-- Actions Section -->
+  <div class="actions">
+    @if (isAuthenticated()) {
+    <div class="cart-icon" (click)="navigateToCart()">
+      @if (cartService.totalItems() > 0) {
+      <span class="cart-count">
+        {{ cartService.totalItems() }}
+      </span>
+      }
+      <img src="assets/icons/cart.svg" alt="Email" />
+    </div>
+    } @else {
+    <a (click)="onLogin()" class="auth-link">Login</a>
+    <a (click)="onRegister()" class="auth-link">Register</a>
+    }
+
+    <!-- Mobile Menu Button -->
+    @if (isMobile) {
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    }
+  </div>
+
+  <!-- Mobile Menu -->
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item [routerLink]="['/about']">About Us</button>
+    <button mat-menu-item [routerLink]="['/support']">Support</button>
+    <button mat-menu-item [routerLink]="['/weather']">Weather</button>
+    @if (isAuthenticated()) {
+    <button mat-menu-item (click)="onLogout()">Sign Out</button>
+    }
+  </mat-menu>
+</nav>

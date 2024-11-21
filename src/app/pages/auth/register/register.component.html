@@ -1,0 +1,76 @@
+<div class="auth-box">
+  <div class="switch-section">
+    <h2>Have an account?</h2>
+    <p>Sign in if you have an account</p>
+    <button mat-button class="signin-button" (click)="goToLogin()">
+      Sign In ➔
+    </button>
+  </div>
+
+  <div class="form-section">
+    <h2>Create new account</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="onRegister()" class="form">
+      <mat-form-field appearance="fill" class="input-field">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="input-field">
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="username" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="input-field">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" />
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="primary"
+        class="action-button full-width"
+        style="margin-top: 0"
+      >
+        Register
+      </button>
+    </form>
+
+    <div class="divider">
+      <span>or</span>
+    </div>
+    <button mat-raised-button class="google-login" (click)="loginWithGoogle()">
+      <svg
+        width="25"
+        height="26"
+        viewBox="0 0 25 26"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M12.6719 10.3682V15.2758H19.4918C19.1923 16.8541 18.2936 18.1905 16.9458 19.0891L21.0585 22.2803C23.4546 20.0684 24.8371 16.8197 24.8371 12.9604C24.8371 12.0618 24.7564 11.1977 24.6066 10.3683L12.6719 10.3682Z"
+          fill="#4285F4"
+        />
+        <path
+          d="M5.57023 15.084L4.64267 15.794L1.35938 18.3515C3.44451 22.4873 7.71817 25.3444 12.6718 25.3444C16.0932 25.3444 18.9617 24.2154 21.0584 22.28L16.9457 19.0888C15.8167 19.8492 14.3767 20.31 12.6718 20.31C9.37705 20.31 6.57774 18.0866 5.57541 15.0913L5.57023 15.084Z"
+          fill="#34A853"
+        />
+        <path
+          d="M1.35928 6.99316C0.495314 8.6981 0 10.622 0 12.6726C0 14.7232 0.495314 16.6471 1.35928 18.3521C1.35928 18.3635 5.57572 15.0803 5.57572 15.0803C5.32228 14.3199 5.17247 13.5136 5.17247 12.6725C5.17247 11.8314 5.32228 11.025 5.57572 10.2647L1.35928 6.99316Z"
+          fill="#FBBC05"
+        />
+        <path
+          d="M12.672 5.0459C14.5383 5.0459 16.1972 5.69102 17.522 6.93524L21.1508 3.30638C18.9505 1.25579 16.0936 0 12.672 0C7.71843 0 3.44451 2.84552 1.35938 6.99285L5.57569 10.2646C6.57788 7.26931 9.37731 5.0459 12.672 5.0459Z"
+          fill="#EA4335"
+        />
+      </svg>
+
+      Continue with Google
+    </button>
+    @if (isSmallScreen) {
+    <div class="toggle-text">
+      Don’t have an account?
+      <a (click)="goToLogin()" class="sign-up-link"><u>Login</u></a>
+    </div>
+    }
+  </div>
+</div>

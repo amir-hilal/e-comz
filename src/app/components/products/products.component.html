@@ -1,0 +1,40 @@
+<div class="products-container">
+  <div class="search-bar">
+    <input
+      type="text"
+      placeholder="Search for items..."
+      [(ngModel)]="searchTerm"
+      (ngModelChange)="onSearchChange()"
+    />
+  </div>
+
+  <!-- Skeletons for fetching or searching -->
+  @if (loading() || searchLoading()) {
+  <div class="product-grid">
+    <div class="product-card skeleton-card" *ngFor="let _ of skeletonArray">
+      <div class="bg-circle skeleton-circle"></div>
+    </div>
+  </div>
+  }
+
+  <!-- Actual product cards -->
+  @if (!loading() && !searchLoading()) {
+  <div class="product-grid">
+    <div
+      *ngFor="let product of filteredProducts()"
+      class="product-card"
+      (click)="navigateToProduct(product.id)"
+    >
+      <div class="bg-circle"></div>
+      <div class="product-info-row">
+        <h3 class="product-title">{{ product.title }}</h3>
+        <p class="product-category">{{ product.category }}</p>
+      </div>
+      <div class="product-image-row">
+        <img [src]="product.image" alt="{{ product.title }}" />
+      </div>
+      <div class="product-price-row">${{ product.price }}</div>
+    </div>
+  </div>
+  }
+</div>
