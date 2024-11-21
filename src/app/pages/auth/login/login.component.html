@@ -54,12 +54,14 @@
 
       Continue with Google
     </button>
-    <div *ngIf="isSmallScreen" class="toggle-text">
+    @if (isSmallScreen) {
+    <div class="toggle-text">
       Don’t have an account?
-      <a (click)="goToRegister()" style="cursor: pointer" class="sign-up-link"
-        ><u>Register</u></a
-      >
+      <a (click)="goToRegister()" style="cursor: pointer" class="sign-up-link">
+        <u>Register</u>
+      </a>
     </div>
+    }
   </div>
 
   <div class="switch-section">

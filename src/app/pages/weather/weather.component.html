@@ -1,0 +1,92 @@
+<mat-tab-group (selectedIndexChange)="onTabChange($event)">
+  <mat-tab *ngFor="let city of cities" [label]="city.name">
+    <ng-template matTabContent>
+      <!-- Date Range Picker -->
+      <div class="date-picker-container">
+        <mat-form-field appearance="fill">
+          <mat-label>Start Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="startPicker"
+            [(ngModel)]="dateRange.start"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="startPicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #startPicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>End Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="endPicker"
+            [(ngModel)]="dateRange.end"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="endPicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #endPicker></mat-datepicker>
+        </mat-form-field>
+
+        
+        <div>
+          <button
+            mat-raised-button
+            color="primary"
+            class="fetch-weather-button"
+            (click)="loadCityWeather(city)"
+          >
+            Fetch Weather
+          </button>
+        </div>
+      </div>
+
+      <!-- Loading Indicator -->
+      @if (loadingStates[city.name]) {
+      <div class="loading"><mat-spinner></mat-spinner></div>
+      }
+
+      <!-- Error Message -->
+      @if (errors[city.name]) {
+      <div class="error">{{ errors[city.name] }}</div>
+      }
+
+      <!-- Weather Data Table -->
+      @if (weatherData[city.name] && !errors[city.name]) {
+      <div>
+        <h3>{{ city.name }} Weather</h3>
+        <p>Loaded: {{ timeLoaded[city.name] | date : "medium" }}</p>
+
+        <table
+          mat-table
+          [dataSource]="weatherData[city.name]"
+          class="mat-elevation-z8"
+        >
+          <ng-container matColumnDef="time">
+            <th mat-header-cell *matHeaderCellDef>Time</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.time | date : "medium" }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="temperature">
+            <th mat-header-cell *matHeaderCellDef>Temperature (°C)</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.temperature }}
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="['time', 'temperature']"></tr>
+          <tr
+            mat-row
+            *matRowDef="let row; columns: ['time', 'temperature']"
+          ></tr>
+        </table>
+      </div>
+      }
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { CartService } from '../services/cart/cart.service';
+import { CartService } from '../../services/cart/cart.service';
 
 @Component({
   selector: 'app-cart',

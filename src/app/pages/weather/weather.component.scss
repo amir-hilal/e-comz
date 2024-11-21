@@ -1,0 +1,21 @@
+.date-picker-container{
+  display: flex;
+  gap:2rem;
+  margin-top: 2rem;
+
+  .fetch-weather-button{
+    height: 74%;
+  }
+}
+
+::ng-deep .mdc-tab__text-label {
+  font-weight: bold;
+}
+
+:host ::ng-deep .mat-elevation-z8 {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+:host ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled){
+  background-color: rgba(255, 255, 255, 0.6   );
+
+}
