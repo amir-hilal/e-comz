@@ -74,8 +74,10 @@ export const routes: Routes = [
         data: { animation: 'WeatherPage' },
       },
 
-      // { path: 'cart', component: CartComponent },
-      // { path: 'product/:id', component: ProductDetailsComponent },
+      {
+        path: '**',
+        redirectTo: 'home',
+      },
     ],
   },
 ];
